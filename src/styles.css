@@ -1,0 +1,106 @@
+/* styles.css */
+
+/* General app styles */
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: 'Arial', sans-serif;
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+/* Top bar styling */
+.top-bar {
+  background-color: #2d2d2d;
+  color: white;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000; /* Ensures the top bar stays above other content */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Adds a slight shadow for separation */
+}
+
+.top-bar h1 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.top-bar select {
+  margin-left: 20px;
+  padding: 6px;
+  background-color: white;
+  color: black;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Main content styles */
+.main-content {
+  padding: 100px 20px 20px; /* Add padding to avoid overlap with the top bar */
+}
+
+.main-content table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.main-content th, .main-content td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.main-content th {
+  background-color: #f4f4f4;
+  font-weight: bold;
+}
+
+.main-content td {
+  text-align: left;
+}
+
+.main-content tr:hover {
+  background-color: #f9f9f9;
+}
+
+.flex {
+  display: flex;
+}
+
+.justify-left {
+  justify-content: flex-start;
+}
+
+.align-left {
+  text-align: left;
+}
+
+/* Checkbox and input styling */
+input[type="checkbox"] {
+  transform: scale(1.2);
+  margin-right: 10px;
+}
+
+/* Loading and error container */
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.bg-white {
+  background-color: white;
+}
+
+.text-red-500 {
+  color: #f56565;
+}
+
+.text-blue-600 {
+  color: #3182ce;
+}
