@@ -1,120 +1,111 @@
-/* styles.css */
-
-/* General app styles */
-body, html {
+/* General styles */
+body {
   margin: 0;
-  padding: 0;
   font-family: 'Arial', sans-serif;
-  background-color: #f0f0f0;
-  color: #333;
+  background-color: #f4f4f9;
 }
 
-/* Top bar styling */
-.top-bar {
-  background-color: #2d2d2d;
-  color: white;
-  padding: 10px 20px;
+.container {
   display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.top-bar {
+  background-color: #333;
+  color: white;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
   align-items: center;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 1000; /* Ensures the top bar stays above other content */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Adds a slight shadow for separation */
 }
 
-.top-bar h1 {
-  margin: 0;
-  font-size: 24px;
-  font-weight: bold;
-}
-
-.top-bar select {
-  margin-left: 20px;
-  padding: 6px;
-  background-color: white;
-  color: black;
-  border: 1px solid #ccc;
+.team-selector {
+  padding: 0.5rem;
   border-radius: 5px;
+  font-size: 1rem;
 }
 
-/* Main content styles */
 .main-content {
-  padding: 100px 20px 20px; /* Add padding to avoid overlap with the top bar */
+  flex-grow: 1;
+  padding: 1rem;
+  overflow-y: auto;
+  background-color: #ffffff;
 }
 
-.main-content table {
+.operative-table {
   width: 100%;
   border-collapse: collapse;
 }
 
-.main-content th, .main-content td {
+.operative-table th, .operative-table td {
   border: 1px solid #ddd;
-  padding: 8px;
-}
-
-.main-content th {
-  background-color: #f4f4f4;
-  font-weight: bold;
-}
-
-.main-content td {
+  padding: 0.75rem;
   text-align: left;
 }
 
-.main-content tr:hover {
-  background-color: #f9f9f9;
-}
-
-.flex {
+.operative-info {
   display: flex;
+  align-items: center;
 }
 
-.justify-left {
-  justify-content: flex-start;
+.checkbox {
+  margin-right: 0.5rem;
 }
 
-.align-left {
-  text-align: left;
+/* Weapon grid styles */
+.weapon-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5rem;
 }
 
-/* Checkbox and input styling */
-input[type="checkbox"] {
-  transform: scale(1.2);
-  margin-right: 10px;
+.weapon-item {
+  display: flex;
+  align-items: center;
 }
 
-/* Loading and error container */
-.center {
+.weapon-item .checkbox {
+  margin-right: 0.5rem;
+}
+
+/* Loading and error screen styles */
+.loading-screen, .error-screen {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
 }
 
-.bg-white {
-  background-color: white;
+.error-message {
+  color: red;
+  margin-bottom: 1rem;
 }
 
-.text-red-500 {
-  color: #f56565;
+.retry-button {
+  background-color: #007bff;
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
-.text-blue-600 {
-  color: #3182ce;
+.retry-button:hover {
+  background-color: #0056b3;
 }
 
-/* General styling for the grid layout */
-.grid {
-  display: grid;
-  gap: 1rem;
-}
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .top-bar h1 {
+    font-size: 1.25rem;
+  }
 
-.grid-cols-2 {
-  grid-template-columns: repeat(2, 1fr);
-}
+  .team-selector {
+    font-size: 0.875rem;
+  }
 
-.gap-2 {
-  gap: 0.5rem;
+  .operative-table th, .operative-table td {
+    font-size: 0.875rem;
+  }
 }

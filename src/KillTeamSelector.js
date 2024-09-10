@@ -1,9 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import OperativeStats from './OperativeStats'; // Import the new component
 
+// Weapon icons
 const weaponIcons = {
-  M: '⚔️', // Melee weapon
-  R: '🔫', // Range weapon
+  M: '⚔️', // Monochrome sword for Melee weapon
+  R: '✚', // Monochrome cross for Range weapon
+};
+
+// Mapping shape tokens to Unicode characters
+const replaceShapeTokens = (text) => {
+  return text
+    .replace(/\[CIRCLE\]/g, '⬤')
+    .replace(/\[SQUARE\]/g, '■')
+    .replace(/\[TRIANGLE\]/g, '▲')
+    .replace(/\[PENTAGON\]/g, '⬟');
 };
 
 const KillTeamSelector = () => {
@@ -69,7 +79,7 @@ const KillTeamSelector = () => {
         fireteam.operatives.map(op => ({
           name: op.opname,
           stats: {
-            M: op.M,
+            M: replaceShapeTokens(op.M), // Apply shape replacement here
             APL: op.APL,
             GA: op.GA,
             DF: op.DF,
@@ -108,22 +118,22 @@ const KillTeamSelector = () => {
     ));
   };
 
-  if (isLoading) return <div className="flex justify-center items-center h-screen">Loading kill teams...</div>;
+  if (isLoading) return <div className="loading-screen">Loading kill teams...</div>;
   if (error) return (
-    <div className="flex flex-col items-center justify-center h-screen">
-      <p className="text-red-500 mb-4">{error}</p>
-      <button onClick={fetchKillTeams} className="bg-blue-500 text-white px-4 py-2 rounded">Try Again</button>
+    <div className="error-screen">
+      <p className="error-message">{error}</p>
+      <button onClick={fetchKillTeams} className="retry-button">Try Again</button>
     </div>
   );
 
   return (
-    <div className="flex flex-col h-screen bg-gray-100">
-      <div className="top-bar bg-gray-800 text-white p-4 flex items-center space-x-4">
-        <h1 className="text-xl font-bold">ServoSummary-KT</h1>
+    <div className="container">
+      <div className="top-bar">
+        <h1>ServoSummary-KT</h1>
         <select
           onChange={handleTeamSelect}
           defaultValue=""
-          className="bg-white text-black p-2 rounded"
+          className="team-selector"
         >
           <option value="">Select a Kill Team</option>
           {killTeams.map(team => (
@@ -133,41 +143,39 @@ const KillTeamSelector = () => {
           ))}
         </select>
       </div>
-      <div className="main-content p-6 overflow-auto">
+      <div className="main-content">
         {selectedTeam && (
-          <table className="w-full border-collapse bg-white shadow-sm">
+          <table className="operative-table">
             <thead>
-              <tr className="bg-gray-200">
-                <th className="border p-2 text-left w-1/2">Operative</th>
-                <th className="border p-2 text-left w-1/2">Weapons</th>
+              <tr>
+                <th>Operative</th>
+                <th>Weapons</th>
               </tr>
             </thead>
             <tbody>
               {operatives.map((operative, opIndex) => (
-                <tr key={opIndex} className="border-b hover:bg-gray-50">
-                  <td className="border p-2 align-top">
-                    <div className="flex flex-col">
-                      <div className="flex items-center space-x-2">
-                        <input
-                          type="checkbox"
-                          checked={operative.checked}
-                          onChange={() => toggleOperative(opIndex)}
-                          className="form-checkbox h-4 w-4 text-blue-600"
-                        />
-                        <span>{operative.name}</span>
-                      </div>
-                      <OperativeStats stats={operative.stats} />
+                <tr key={opIndex}>
+                  <td>
+                    <div className="operative-info">
+                      <input
+                        type="checkbox"
+                        checked={operative.checked}
+                        onChange={() => toggleOperative(opIndex)}
+                        className="checkbox"
+                      />
+                      <span>{operative.name}</span>
                     </div>
+                    <OperativeStats stats={operative.stats} />
                   </td>
-                  <td className="border p-2">
-                    <div className="grid grid-cols-2 gap-2">
+                  <td>
+                    <div className="weapon-grid">
                       {operative.weapons.map((weapon, weaponIndex) => (
-                        <div key={weaponIndex} className="flex items-center space-x-2">
+                        <div key={weaponIndex} className="weapon-item">
                           <input
                             type="checkbox"
                             checked={weapon.checked}
                             onChange={() => toggleWeapon(opIndex, weaponIndex)}
-                            className="form-checkbox h-4 w-4 text-blue-600"
+                            className="checkbox"
                           />
                           <span>{weapon.name}</span>
                         </div>
