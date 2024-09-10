@@ -15,7 +15,7 @@ const replaceShapeTokens = (text) => {
     .replace(/\[CIRCLE\]/g, '⬤')
     .replace(/\[SQUARE\]/g, '■')
     .replace(/\[TRIANGLE\]/g, '▲')
-    .replace(/\[PENTAGON\]/g, '⬟');
+    .replace(/\[PENT\]/g, '⬟');
 };
 
 const KillTeamSelector = () => {
@@ -33,7 +33,7 @@ const KillTeamSelector = () => {
         fireteam.operatives.map(op => ({
           name: op.opname,
           stats: {
-            M: op.M,
+            M: replaceShapeTokens(op.M),
             APL: op.APL,
             GA: op.GA,
             DF: op.DF,
@@ -42,11 +42,20 @@ const KillTeamSelector = () => {
           },
           weapons: op.weapons.flatMap(weapon => 
             weapon.profiles.map(profile => ({
-              name: `${weaponIcons[weapon.weptype] || ''} ${replaceShapeTokens(weapon.wepname)}${profile.name ? ` - ${profile.name}` : ''}`,
-              checked: true
+              name: `${weaponIcons[weapon.weptype] || ''} ${weapon.wepname}${profile.name ? ` - ${profile.name}` : ''}`,
+              stats: {
+                A: profile.A,
+                BS: profile.BS,
+                D: profile.D,
+                SR: profile.SR,
+              },
+              checked: weapon.isdefault === 1
             }))
           ),
-          abilities: op.abilities || [], // Ensure abilities is an array
+          abilities: op.abilities.map(ability => ({
+            title: ability.title,
+            description: ability.description
+          })) || [],
           checked: true
         }))
       );
@@ -93,37 +102,75 @@ const KillTeamSelector = () => {
   
 
   const generateOperativesTable = (operatives) => {
-    let tableHTML = `
-      <table class="striped">
-        <thead>
-          <tr><th>Operative</th><th>Movement</th><th>Actions</th><th>Grenades</th><th>Defence</th><th>Save</th><th>Wounds</th><th>Weapons</th><th>Abilities</th></tr>
-        </thead>
-        <tbody>
-    `;
+    let tableHTML = ``;
 
     operatives.forEach(operative => {
       if (operative.checked) {
-        const weapons = operative.weapons
-          .filter(weapon => weapon.checked)
-          .map(w => `${w.name}`).join(", ");
-        const abilities = (operative.abilities || []).join(", ");
         tableHTML += `
-          <tr>
-            <td>${operative.name}</td>
-            <td>${operative.stats.M}</td>
-            <td>${operative.stats.APL}</td>
-            <td>${operative.stats.GA}</td>
-            <td>${operative.stats.DF}</td>
-            <td>${operative.stats.SV}</td>
-            <td>${operative.stats.W}</td>
-            <td>${weapons}</td>
-            <td>${abilities}</td>
-          </tr>
+        <div class="Card">
+          <table class="operative">
+            <tbody>
+              <tr>
+                <th class="Name" rowspan="2">${operative.name}</th>
+                <th>M</th>
+                <th>APL</th>
+                <th>GA</th>
+                <th>DF</th>
+                <th>SV</th>
+                <th>W</th>
+              </tr>
+              <tr>
+                <td>${operative.stats.M}</td>
+                <td>${operative.stats.APL}</td>
+                <td>${operative.stats.GA}</td>
+                <td>${operative.stats.DF}</td>
+                <td>${operative.stats.SV}</td>
+                <td>${operative.stats.W}</td>
+              </tr>
+            </tbody>
+          </table>
+          <table class="weapons">
+            <tbody>
+              <tr>
+                <th class="name">Name</th>
+                <th class="bs">Skill</th>
+                <th class="attack">A</th>
+                <th class="damage">D</th>
+                <th>SR</th>
+              </tr>
+              ${operative.weapons
+                .filter(weapon => weapon.checked)
+                .map(weapon => `
+                  <tr>
+                    <td>${weapon.name}</td>
+                    <td>${weapon.stats.BS}</td>
+                    <td>${weapon.stats.A}</td>
+                    <td>${weapon.stats.D}</td>
+                    <td>${weapon.stats.SR}</td>
+                  </tr>
+                `).join('')}
+            </tbody>
+          </table>
+          <table class="abilityList">
+            <tbody>
+              <tr>
+                <th>Name</th>
+                <th>Description</th>
+              </tr>
+              ${operative.abilities
+                .map(ability => `
+                  <tr>
+                    <td class="name">${ability.title}</td>
+                    <td class="desc">${ability.description}</td>
+                  </tr>
+                `).join('')}
+            </tbody>
+          </table>
+        </div>
         `;
       }
     });
 
-    tableHTML += `</tbody></table>`;
     return tableHTML;
   };
 
