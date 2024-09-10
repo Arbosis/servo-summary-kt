@@ -104,3 +104,17 @@ input[type="checkbox"] {
 .text-blue-600 {
   color: #3182ce;
 }
+
+/* General styling for the grid layout */
+.grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.grid-cols-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.gap-2 {
+  gap: 0.5rem;
+}

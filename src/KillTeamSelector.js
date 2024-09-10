@@ -1,14 +1,9 @@
-// KillTeamSelector.js
 import React, { useState, useEffect } from 'react';
-import OperativeStats from './OperativeStats';
+import OperativeStats from './OperativeStats'; // Import the new component
 
-// Utility function to replace placeholders with Unicode symbols
-const replaceSymbols = (text) => {
-  return text
-    .replace(/\[CIRCLE\]/g, '○')
-    .replace(/\[SQUARE\]/g, '◻')
-    .replace(/\[TRIANGLE\]/g, '△')
-    .replace(/\[PENT\]/g, '⬠');
+const weaponIcons = {
+  M: '⚔️', // Melee weapon
+  R: '🔫', // Range weapon
 };
 
 const KillTeamSelector = () => {
@@ -74,7 +69,7 @@ const KillTeamSelector = () => {
         fireteam.operatives.map(op => ({
           name: op.opname,
           stats: {
-            M: replaceSymbols(op.M),
+            M: op.M,
             APL: op.APL,
             GA: op.GA,
             DF: op.DF,
@@ -83,7 +78,7 @@ const KillTeamSelector = () => {
           },
           weapons: op.weapons.flatMap(weapon => 
             weapon.profiles.map(profile => ({
-              name: replaceSymbols(`${weapon.wepname}${profile.name ? ` - ${profile.name}` : ''}`),
+              name: `${weaponIcons[weapon.weptype] || ''} ${weapon.wepname}${profile.name ? ` - ${profile.name}` : ''}`,
               checked: true
             }))
           ),
@@ -151,38 +146,33 @@ const KillTeamSelector = () => {
               {operatives.map((operative, opIndex) => (
                 <tr key={opIndex} className="border-b hover:bg-gray-50">
                   <td className="border p-2 align-top">
-                    <div className="flex items-center space-x-2">
-                      <input
-                        type="checkbox"
-                        checked={operative.checked}
-                        onChange={() => toggleOperative(opIndex)}
-                        className="form-checkbox h-4 w-4 text-blue-600"
-                      />
-                      <span>{operative.name}</span>
+                    <div className="flex flex-col">
+                      <div className="flex items-center space-x-2">
+                        <input
+                          type="checkbox"
+                          checked={operative.checked}
+                          onChange={() => toggleOperative(opIndex)}
+                          className="form-checkbox h-4 w-4 text-blue-600"
+                        />
+                        <span>{operative.name}</span>
+                      </div>
+                      <OperativeStats stats={operative.stats} />
                     </div>
-                    {/* Render operative stats here */}
-                    <OperativeStats stats={operative.stats} />
                   </td>
                   <td className="border p-2">
-                    <table className="w-full">
-                      <tbody>
-                        {operative.weapons.map((weapon, weaponIndex) => (
-                          <tr key={weaponIndex}>
-                            <td className="p-1">
-                              <div className="flex items-center space-x-2">
-                                <input
-                                  type="checkbox"
-                                  checked={weapon.checked}
-                                  onChange={() => toggleWeapon(opIndex, weaponIndex)}
-                                  className="form-checkbox h-4 w-4 text-blue-600"
-                                />
-                                <span>{weapon.name}</span>
-                              </div>
-                            </td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
+                    <div className="grid grid-cols-2 gap-2">
+                      {operative.weapons.map((weapon, weaponIndex) => (
+                        <div key={weaponIndex} className="flex items-center space-x-2">
+                          <input
+                            type="checkbox"
+                            checked={weapon.checked}
+                            onChange={() => toggleWeapon(opIndex, weaponIndex)}
+                            className="form-checkbox h-4 w-4 text-blue-600"
+                          />
+                          <span>{weapon.name}</span>
+                        </div>
+                      ))}
+                    </div>
                   </td>
                 </tr>
               ))}
