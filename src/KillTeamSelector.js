@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import OperativeStats from './OperativeStats'; // Import the new component
+import React, { useState } from 'react';
+import { useKillTeams } from './useKillTeams'; // Custom hook for fetching kill teams
+import OperativeRow from './OperativeRow'; // Import the OperativeRow component
+import './KillTeamSelector.css'; // CSS file for styling
 
 // Weapon icons
 const weaponIcons = {
   M: '⚔️', // Monochrome sword for Melee weapon
-  R: '✚', // Monochrome cross for Range weapon
+  R: '🔫', // Monochrome cross for Range weapon
 };
 
 // Mapping shape tokens to Unicode characters
@@ -17,59 +19,11 @@ const replaceShapeTokens = (text) => {
 };
 
 const KillTeamSelector = () => {
-  const [killTeams, setKillTeams] = useState([]);
+  const { killTeams, isLoading, error } = useKillTeams();
   const [selectedTeam, setSelectedTeam] = useState(null);
   const [operatives, setOperatives] = useState([]);
-  const [error, setError] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
-    fetchKillTeams();
-  }, []);
-
-  const fetchKillTeams = async () => {
-    setIsLoading(true);
-    setError(null);
-    try {
-      const response = await fetch('https://raw.githubusercontent.com/vjosset/killteamjson/main/compendium.json', {
-        method: 'GET',
-        headers: {
-          'Accept': 'application/json',
-        },
-        mode: 'cors',
-      });
-      
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      
-      const data = await response.json();
-      
-      if (!Array.isArray(data)) {
-        throw new Error('Data structure is not as expected: root should be an array');
-      }
-
-      const teams = data.flatMap(faction => 
-        faction.killteams ? faction.killteams.map(team => ({
-          ...team,
-          factionName: faction.factionname
-        })) : []
-      );
-      
-      if (teams.length === 0) {
-        throw new Error('No kill teams found in the data');
-      }
-
-      setKillTeams(teams);
-      setIsLoading(false);
-    } catch (error) {
-      console.error('Error details:', error);
-      setError(`Error fetching kill teams: ${error.message}. Please try again later.`);
-      setIsLoading(false);
-    }
-  };
-
-  const handleTeamSelect = (event) => {
+  const handleKillTeamSelection = (event) => {
     const teamName = event.target.value;
     const team = killTeams.find(kt => kt.killteamname === teamName);
     setSelectedTeam(team);
@@ -79,7 +33,7 @@ const KillTeamSelector = () => {
         fireteam.operatives.map(op => ({
           name: op.opname,
           stats: {
-            M: replaceShapeTokens(op.M), // Apply shape replacement here
+            M: op.M,
             APL: op.APL,
             GA: op.GA,
             DF: op.DF,
@@ -88,10 +42,11 @@ const KillTeamSelector = () => {
           },
           weapons: op.weapons.flatMap(weapon => 
             weapon.profiles.map(profile => ({
-              name: `${weaponIcons[weapon.weptype] || ''} ${weapon.wepname}${profile.name ? ` - ${profile.name}` : ''}`,
+              name: `${weaponIcons[weapon.weptype] || ''} ${replaceShapeTokens(weapon.wepname)}${profile.name ? ` - ${profile.name}` : ''}`,
               checked: true
             }))
           ),
+          abilities: op.abilities || [], // Ensure abilities is an array
           checked: true
         }))
       );
@@ -101,40 +56,85 @@ const KillTeamSelector = () => {
     }
   };
 
-  const toggleOperative = (index) => {
-    setOperatives(ops => ops.map((op, i) => 
-      i === index ? { ...op, checked: !op.checked } : op
-    ));
+  const toggleOperativeSelection = (index) => {
+    setOperatives(ops => ops.map((op, i) => i === index ? { ...op, checked: !op.checked } : op));
   };
 
-  const toggleWeapon = (opIndex, weaponIndex) => {
-    setOperatives(ops => ops.map((op, i) => 
-      i === opIndex ? {
-        ...op,
-        weapons: op.weapons.map((w, j) => 
-          j === weaponIndex ? { ...w, checked: !w.checked } : w
-        )
-      } : op
-    ));
+  const toggleWeaponSelection = (opIndex, weaponIndex) => {
+    setOperatives(ops => ops.map((op, i) => i === opIndex ? {
+      ...op,
+      weapons: op.weapons.map((w, j) => j === weaponIndex ? { ...w, checked: !w.checked } : w)
+    } : op));
   };
 
-  if (isLoading) return <div className="loading-screen">Loading kill teams...</div>;
-  if (error) return (
-    <div className="error-screen">
-      <p className="error-message">{error}</p>
-      <button onClick={fetchKillTeams} className="retry-button">Try Again</button>
-    </div>
-  );
+  const generateSummary = () => {
+    if (!selectedTeam) return;
+  
+    const summaryWindow = window.open('', '_blank');
+  
+    let summaryHTML = `
+      <html>
+        <head>
+          <title>Kill Team Summary</title>
+          <link rel="stylesheet" type="text/css" href="summaryStyles.css">
+          <style>
+            /* Additional inline styles if needed */
+          </style>
+        </head>
+        <body>
+          ${generateOperativesTable(operatives)}
+        </body>
+      </html>
+    `;
+  
+    summaryWindow.document.write(summaryHTML);
+    summaryWindow.document.close();
+  };
+  
+
+  const generateOperativesTable = (operatives) => {
+    let tableHTML = `
+      <table class="striped">
+        <thead>
+          <tr><th>Operative</th><th>Movement</th><th>Actions</th><th>Grenades</th><th>Defence</th><th>Save</th><th>Wounds</th><th>Weapons</th><th>Abilities</th></tr>
+        </thead>
+        <tbody>
+    `;
+
+    operatives.forEach(operative => {
+      if (operative.checked) {
+        const weapons = operative.weapons
+          .filter(weapon => weapon.checked)
+          .map(w => `${w.name}`).join(", ");
+        const abilities = (operative.abilities || []).join(", ");
+        tableHTML += `
+          <tr>
+            <td>${operative.name}</td>
+            <td>${operative.stats.M}</td>
+            <td>${operative.stats.APL}</td>
+            <td>${operative.stats.GA}</td>
+            <td>${operative.stats.DF}</td>
+            <td>${operative.stats.SV}</td>
+            <td>${operative.stats.W}</td>
+            <td>${weapons}</td>
+            <td>${abilities}</td>
+          </tr>
+        `;
+      }
+    });
+
+    tableHTML += `</tbody></table>`;
+    return tableHTML;
+  };
+
+  if (isLoading) return <div>Loading kill teams...</div>;
+  if (error) return <div>{error}</div>;
 
   return (
     <div className="container">
       <div className="top-bar">
         <h1>ServoSummary-KT</h1>
-        <select
-          onChange={handleTeamSelect}
-          defaultValue=""
-          className="team-selector"
-        >
+        <select onChange={handleKillTeamSelection} className="team-selector">
           <option value="">Select a Kill Team</option>
           {killTeams.map(team => (
             <option key={team.killteamname} value={team.killteamname}>
@@ -142,52 +142,29 @@ const KillTeamSelector = () => {
             </option>
           ))}
         </select>
-      </div>
-      <div className="main-content">
         {selectedTeam && (
-          <table className="operative-table">
-            <thead>
-              <tr>
-                <th>Operative</th>
-                <th>Weapons</th>
-              </tr>
-            </thead>
-            <tbody>
-              {operatives.map((operative, opIndex) => (
-                <tr key={opIndex}>
-                  <td>
-                    <div className="operative-info">
-                      <input
-                        type="checkbox"
-                        checked={operative.checked}
-                        onChange={() => toggleOperative(opIndex)}
-                        className="checkbox"
-                      />
-                      <span>{operative.name}</span>
-                    </div>
-                    <OperativeStats stats={operative.stats} />
-                  </td>
-                  <td>
-                    <div className="weapon-grid">
-                      {operative.weapons.map((weapon, weaponIndex) => (
-                        <div key={weaponIndex} className="weapon-item">
-                          <input
-                            type="checkbox"
-                            checked={weapon.checked}
-                            onChange={() => toggleWeapon(opIndex, weaponIndex)}
-                            className="checkbox"
-                          />
-                          <span>{weapon.name}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <button onClick={generateSummary} className="generate-summary-button">
+            Generate Summary
+          </button>
         )}
       </div>
+      {selectedTeam && (
+        <table className="operative-table">
+          <thead>
+            <tr><th>Operative</th><th>Weapons</th></tr>
+          </thead>
+          <tbody>
+            {operatives.map((operative, opIndex) => (
+              <OperativeRow
+                key={opIndex}
+                operative={operative}
+                toggleOperative={() => toggleOperativeSelection(opIndex)}
+                toggleWeapon={(weaponIndex) => toggleWeaponSelection(opIndex, weaponIndex)}
+              />
+            ))}
+          </tbody>
+        </table>
+      )}
     </div>
   );
 };

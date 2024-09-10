@@ -1,0 +1,179 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed:wght@300;400;700&family=IBM+Plex+Sans+Condensed:wght@300;400;700&family=Oswald:wght@300;600;700&family=Recursive:wght@300;400;700&family=Roboto+Condensed:wght@300;700&family=Roboto:wght@300;400;700&display=swap');
+
+@media print {
+  body{
+    column-count: 2;
+    -webkit-column-count: 2;
+    -moz-column-count: 2;
+  }
+}
+
+:root {
+  --header-bg: #ccc;
+  --bg-alternate: #eee;
+  --border-color: #666;
+  --font-bold: 700;
+  --fontName: Fira Sans Condensed;
+  --font-size-normal: 11;
+  --fontNameTitle: Fira Sans Condensed;
+  --font-size-title: 13;
+}
+
+* {
+  font-family: var(--fontName), 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: var(--font-size-normal);
+  vertical-align: top;
+}
+b, strong {
+  font-weight: var(--font-bold);
+}
+ul {
+  margin: 1px;
+}
+
+.Card {
+  margin-bottom: 4px;
+  border: 2px solid var(--border-color);
+  page-break-inside: avoid;
+}
+
+.Title {
+  text-transform: uppercase;
+  text-align: center;
+  background-color: var(--header-bg);
+  border-top: 2px solid var(--border-color);
+  font-weight: var(--font-bold);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+th, td {
+    padding: 2px;
+}
+th {
+  text-transform: uppercase;
+  background-color: var(--header-bg);
+  /* border-top: 2px solid var(--border-color); */
+  font-weight: var(--font-bold);
+}
+
+table .noprint {
+  display: none;
+}
+
+table.multiColumns {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  border: none !important;
+  padding: 0%;
+}
+table.multiColumns td{
+  width: 100%;
+}
+
+/* SINGLE OPERATIVE */
+table.operative {
+  text-align: center;
+  border-bottom: 1px solid var(--border-color);
+}
+table.operative .Name{
+  width: 30%;
+  font-size: var(--font-size-title);
+  font-weight: var(--font-bold);
+  vertical-align: middle;
+  text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+}
+
+/* OPERATIVE LIST */
+table.operativeList *{
+  text-align: center;
+  vertical-align: middle;
+  table-layout: fixed;
+  border-collapse: collapse;
+}
+table.operativeList .stat {
+  width: 25px;
+}
+table.operativeList .name{
+  font-weight: var(--font-bold);
+  text-align: left;
+}
+table.operativeList td.weapons{
+  text-align: left;
+  width: auto;
+}
+table.operativeList tr:nth-child(even){
+  background-color: var(--bg-alternate);
+}
+
+/* WEAPONS */
+table.weapon {
+  text-align: center;
+  table-layout: fixed;
+}
+table.weapon th{
+  background-color: var(--header-bg);
+  font-weight: var(--font-bold);
+}
+table.weapon th.name{
+  /* width: 50%; */
+  text-align: left;
+  font-weight: var(--font-bold);
+}
+table.weapon tr:nth-child(even){
+  background-color: var(--bg-alternate);
+}
+table.weapon td.name{
+  /* width: 50%; */
+  text-align: left;
+}
+table.weapon .type{
+  width: 12px;
+}
+table.weapon .bs,
+table.weapon .attack,
+table.weapon .damage{
+  width: 25px;
+}
+table.weapon .rules{
+  width: auto;
+}
+
+table.eqtable {
+  table-layout: fixed;
+  /* border: 1px; */
+  border-bottom: 1px solid var(--header-bg);
+  text-align: center;
+}
+table.eqtable th{
+  width: auto;
+}
+table.eqtable th:first-child,
+table.eqtable td:first-child{
+  text-align: left;
+}
+
+/* ABILITIES */
+table.abilityList{
+  text-align: center;
+  table-layout: auto;
+}
+table.abilityList th.name{
+  text-align: left;
+  font-weight: var(--font-bold);
+}
+table.abilityList td.name{
+  text-align: left;
+  font-weight: var(--font-bold);
+  max-width: 20%;
+}
+table.abilityList td.desc{
+  text-align: left;
+}
+table.abilityList tr:nth-child(even){
+  background-color: var(--bg-alternate);
+}

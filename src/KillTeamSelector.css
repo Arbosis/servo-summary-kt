@@ -1,0 +1,61 @@
+/* Basic styles for the container */
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  /* Styling for the top bar */
+  .top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .team-selector {
+    font-size: 16px;
+    padding: 5px;
+  }
+  
+  /* Styling for the operative table */
+  .operative-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .operative-table th, .operative-table td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .weapon-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two columns */
+    gap: 10px;
+  }
+  
+  .weapon-item {
+    display: flex;
+    align-items: center;
+  }
+  
+  .checkbox {
+    margin-right: 10px;
+  }
+  
+  .generate-summary-button {
+    margin-left: 10px;
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .generate-summary-button:hover {
+    background-color: #0056b3;
+  }
+  
