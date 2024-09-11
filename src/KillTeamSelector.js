@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useKillTeams } from './useKillTeams'; // Custom hook for fetching kill teams
-import OperativeRow from './OperativeRow'; // Import the OperativeRow component
-import './KillTeamSelector.css'; // CSS file for styling
+import OperativeRow from './OperativeRow'; 
+import PloysTable from './PloysTable';
+
 
 // Weapon icons
 const weaponIcons = {
@@ -59,11 +60,28 @@ const KillTeamSelector = () => {
           checked: true
         }))
       );
+      const stratPloys = team.ploys.strat.map(p => ({
+        name: p.ployname,
+        CP: p.CP,
+        description: replaceShapeTokens(p.description)
+      }));
+      const tacPloys = team.ploys.tac.map(p => ({
+        name: p.ployname,
+        CP: p.CP,
+        description: replaceShapeTokens(p.description)
+      }));
       setOperatives(teamOperatives);
+      setStratPloys(stratPloys);
+      setTacPloys(tacPloys);
     } else {
       setOperatives([]);
+      setStratPloys([]);
+      setTacPloys([]);
     }
   };
+
+  const [stratPloys, setStratPloys] = useState([]);
+  const [tacPloys, setTacPloys] = useState([]);
 
   const toggleOperativeSelection = (index) => {
     setOperatives(ops => ops.map((op, i) => i === index ? { ...op, checked: !op.checked } : op));
@@ -85,7 +103,7 @@ const KillTeamSelector = () => {
       <html>
         <head>
           <title>Kill Team Summary</title>
-          <link rel="stylesheet" type="text/css" href="summaryStyles.css">
+          <link rel="stylesheet" type="text/css" href="${process.env.PUBLIC_URL}/summaryStyles.css">
           <style>
             /* Additional inline styles if needed */
           </style>
@@ -196,24 +214,31 @@ const KillTeamSelector = () => {
             </button>
           )}
         </div>
-      </div>
+      </div> 
+      
       {selectedTeam && (
-        <table className="operative-table">
-          <thead>
-            <tr><th>Operative</th><th>Weapons</th></tr>
-          </thead>
-          <tbody>
-            {operatives.map((operative, opIndex) => (
-              <OperativeRow
-                key={opIndex}
-                operative={operative}
-                toggleOperative={() => toggleOperativeSelection(opIndex)}
-                toggleWeapon={(weaponIndex) => toggleWeaponSelection(opIndex, weaponIndex)}
-              />
-            ))}
-          </tbody>
-        </table>
+        <>
+          <table className="operative-table">
+            <thead>
+              <tr><th>Operative</th><th>Weapons</th></tr>
+            </thead>
+            <tbody>
+              {operatives.map((operative, opIndex) => (
+                <OperativeRow
+                  key={opIndex}
+                  operative={operative}
+                  toggleOperative={() => toggleOperativeSelection(opIndex)}
+                  toggleWeapon={(weaponIndex) => toggleWeaponSelection(opIndex, weaponIndex)}
+                />
+              ))}
+            </tbody>
+          </table>
+          
+          <PloysTable ploys={stratPloys} tableName="Strat Ploys"/>
+          <PloysTable ploys={tacPloys} tableName="Tac Ploys"/>
+        </>
       )}
+
     </div>
   );
 };

@@ -5,7 +5,7 @@ const OperativeRow = ({ operative, toggleOperative, toggleWeapon }) => {
   return (
     <tr>
       <td>
-        <div className="operative-info">
+        <div className="operative-name">
           <input
             type="checkbox"
             checked={operative.checked}
