@@ -161,6 +161,7 @@ table.eqtable td:first-child{
 table.abilityList{
   text-align: center;
   table-layout: auto;
+  font-size: var(--font-size-normal);
 }
 table.abilityList th.name{
   text-align: left;
