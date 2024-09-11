@@ -180,20 +180,22 @@ const KillTeamSelector = () => {
   return (
     <div className="container">
       <div className="top-bar">
-        <h1>ServoSummary-KT</h1>
-        <select onChange={handleKillTeamSelection} className="team-selector">
-          <option value="">Select a Kill Team</option>
-          {killTeams.map(team => (
-            <option key={team.killteamname} value={team.killteamname}>
-              {team.factionName} - {team.killteamname}
-            </option>
-          ))}
-        </select>
-        {selectedTeam && (
-          <button onClick={generateSummary} className="generate-summary-button">
-            Generate Summary
-          </button>
-        )}
+        <h1 className="app-title">ServoSummary-KT</h1>
+        <div className="controls">
+          <select onChange={handleKillTeamSelection} className="team-selector">
+            <option value="">Select a Kill Team</option>
+            {killTeams.map(team => (
+              <option key={team.killteamname} value={team.killteamname}>
+                {team.factionName} - {team.killteamname}
+              </option>
+            ))}
+          </select>
+          {selectedTeam && (
+            <button onClick={generateSummary} className="generate-summary-button">
+              Generate Summary
+            </button>
+          )}
+        </div>
       </div>
       {selectedTeam && (
         <table className="operative-table">

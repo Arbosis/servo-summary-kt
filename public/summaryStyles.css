@@ -175,6 +175,11 @@ table.abilityList td.name{
 table.abilityList td.desc{
   text-align: left;
 }
+table.abilityList .noprint {
+  display: none;
+  font-size: var(--font-size-normal);
+}
+
 table.abilityList tr:nth-child(even){
   background-color: var(--bg-alternate);
 }
