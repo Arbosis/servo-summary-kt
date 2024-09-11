@@ -48,7 +48,7 @@ const KillTeamSelector = () => {
                 A: profile.A,
                 BS: profile.BS,
                 D: profile.D,
-                SR: profile.SR,
+                SR: replaceShapeTokens(profile.SR),
               },
               checked: weapon.isdefault === 1
             }))
@@ -147,28 +147,31 @@ const KillTeamSelector = () => {
               </tr>
             </tbody>
           </table>
-          <table class="weapons">
+          ${operative.weapons.some(weapon => weapon.checked) ? `
+          <table class="weapon">
             <tbody>
               <tr>
                 <th class="name">Name</th>
                 <th class="bs">Skill</th>
                 <th class="attack">A</th>
                 <th class="damage">D</th>
-                <th>SR</th>
+                <th class="rules">SR</th>
               </tr>
               ${operative.weapons
                 .filter(weapon => weapon.checked)
                 .map(weapon => `
                   <tr>
-                    <td>${weapon.name}</td>
-                    <td>${weapon.stats.BS}</td>
-                    <td>${weapon.stats.A}</td>
-                    <td>${weapon.stats.D}</td>
-                    <td>${weapon.stats.SR}</td>
+                    <td class="name">${weapon.name}</td>
+                    <td class="bs">${weapon.stats.BS}</td>
+                    <td class="attack">${weapon.stats.A}</td>
+                    <td class="damage">${weapon.stats.D}</td>
+                    <td class="rules">${weapon.stats.SR}</td>
                   </tr>
                 `).join('')}
             </tbody>
           </table>
+          ` : ``}
+          ${operative.abilities.length ? `
           <table class="abilityList">
             <tbody>
               <tr>
@@ -184,10 +187,42 @@ const KillTeamSelector = () => {
                 `).join('')}
             </tbody>
           </table>
+          ` : ''}
         </div>
         `;
       }
     });
+
+    tableHTML += `
+    <table class="abilityList">
+      <tbody>
+        <tr>
+          <th class="name">Strategic Ploys</th>
+          <th class="desc">Description</th>
+        </tr>
+        ${stratPloys.map(p => `
+          <tr>
+            <td class="name">${p.name} (${p.CP} CP)</td>
+            <td class="desc">${p.description}</td>
+          </tr>
+        `).join('')}
+      </tbody>
+    </table>
+    <table class="abilityList">
+      <tbody>
+        <tr>
+          <th class="name">Tactical Ploys</th>
+          <th class="desc">Description</th>
+        </tr>
+        ${tacPloys.map(p => `
+          <tr>
+            <td class="name">${p.name} (${p.CP} CP)</td>
+            <td class="desc">${p.description}</td>
+          </tr>
+        `).join('')}
+      </tbody>
+    </table>
+    `;
 
     return tableHTML;
   };
