@@ -9,9 +9,10 @@
 }
 
 :root {
-  --header-bg: #ccc;
+  --header-bg: #d9d9d9;
   --bg-alternate: #eee;
   --border-color: #666;
+  --border-soft-color: #e0e0e0;
   --font-bold: 700;
   --fontName: Fira Sans Condensed;
   --font-size-normal: 11;
@@ -34,7 +35,9 @@ ul {
 
 .Card {
   margin-bottom: 4px;
-  border: 2px solid var(--border-color);
+  /* border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.5); */
+  border: 1px solid var(--border-color);
   page-break-inside: avoid;
 }
 
@@ -58,6 +61,9 @@ th {
   background-color: var(--header-bg);
   /* border-top: 2px solid var(--border-color); */
   font-weight: var(--font-bold);
+}
+tr {
+  border-bottom: 1px solid var(--border-soft-color);
 }
 
 table .noprint {
@@ -85,29 +91,7 @@ table.operative .Name{
   font-size: var(--font-size-title);
   font-weight: var(--font-bold);
   vertical-align: middle;
-  text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
-}
-
-/* OPERATIVE LIST */
-table.operativeList *{
-  text-align: center;
-  vertical-align: middle;
-  table-layout: fixed;
-  border-collapse: collapse;
-}
-table.operativeList .stat {
-  width: 25px;
-}
-table.operativeList .name{
-  font-weight: var(--font-bold);
-  text-align: left;
-}
-table.operativeList td.weapons{
-  text-align: left;
-  width: auto;
-}
-table.operativeList tr:nth-child(even){
-  background-color: var(--bg-alternate);
+  /* text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white; */
 }
 
 /* WEAPONS */
@@ -124,9 +108,9 @@ table.weapon th.name{
   text-align: left;
   font-weight: var(--font-bold);
 }
-table.weapon tr:nth-child(even){
+/* table.weapon tr:nth-child(even){
   background-color: var(--bg-alternate);
-}
+} */
 table.weapon td.name{
   /* width: 50%; */
   text-align: left;
@@ -174,12 +158,13 @@ table.abilityList td.name{
 }
 table.abilityList td.desc{
   text-align: left;
+  font-size: var(--font-size-normal);
 }
 table.abilityList .noprint {
   display: none;
   font-size: var(--font-size-normal);
 }
 
-table.abilityList tr:nth-child(even){
+/* table.abilityList tr:nth-child(even){
   background-color: var(--bg-alternate);
-}
+} */
