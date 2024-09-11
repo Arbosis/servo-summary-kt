@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 // Custom hook for fetching Kill Team data
 export const useKillTeams = () => {
@@ -10,13 +11,18 @@ export const useKillTeams = () => {
     setIsLoading(true);
     setError(null);
     try {
-      const response = await fetch('https://raw.githubusercontent.com/vjosset/killteamjson/main/compendium.json');
-      if (!response.ok) {
+      const response = await axios.get('https://raw.githubusercontent.com/vjosset/killteamjson/main/compendium.json', {
+        responseType: 'json',
+        responseEncoding: 'utf8',
+        validateStatus: () => true,
+      });
+
+      if (response.status !== 200) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
       
-      const data = await response.json();
-      
+      const data = response.data;
+
       if (!Array.isArray(data)) {
         throw new Error('Data structure is not as expected: root should be an array');
       }
@@ -39,6 +45,10 @@ export const useKillTeams = () => {
       setIsLoading(false);
     }
   };
+
+  useEffect(() => {
+    fetchKillTeams();
+  }, []);
 
   useEffect(() => {
     fetchKillTeams();
