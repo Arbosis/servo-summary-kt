@@ -7,25 +7,25 @@ import React from 'react';
  */
 const OperativeStats = ({ stats }) => {
   return (
-    <table className="w-full mt-1 text-sm">
+    <table className="operative-stats">
       <thead>
-        <tr className="bg-gray-100">
-          <th className="border p-1">M</th>
-          <th className="border p-1">APL</th>
-          <th className="border p-1">GA</th>
-          <th className="border p-1">Df</th>
-          <th className="border p-1">Sv</th>
-          <th className="border p-1">W</th>
+        <tr>
+          <th>M</th>
+          <th>APL</th>
+          <th>GA</th>
+          <th>Df</th>
+          <th>Sv</th>
+          <th>W</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td className="border p-1">{stats.M}</td>
-          <td className="border p-1">{stats.APL}</td>
-          <td className="border p-1">{stats.GA}</td>
-          <td className="border p-1">{stats.DF}</td>
-          <td className="border p-1">{stats.SV}</td>
-          <td className="border p-1">{stats.W}</td>
+          <td>{stats.M}</td>
+          <td>{stats.APL}</td>
+          <td>{stats.GA}</td>
+          <td>{stats.DF}</td>
+          <td>{stats.SV}</td>
+          <td>{stats.W}</td>
         </tr>
       </tbody>
     </table>
