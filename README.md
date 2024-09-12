@@ -1,70 +1,39 @@
-# Getting Started with Create React App
+# ServoSummary-KT
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+ServoSummary-KT is a React-based web application designed to help Warhammer 40,000: Kill Team players create and manage their kill team rosters. This tool provides an intuitive interface for selecting operatives, managing their equipment, and generating printable summaries for game sessions.
 
-## Available Scripts
+![ServoSummary-KT Screenshot](https://raw.githubusercontent.com/yourusername/servo-summary-kt/main/screenshot.png)
 
-In the project directory, you can run:
+## Features
 
-### `npm start`
+- Select from a list of Kill Teams from publicly updated data
+- Select which operative and weapons to include
+- Generate printable kill team summaries
+- Responsive design for both desktop and mobile use
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Usage
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+1. Select a Kill Team from the dropdown menu.
+2. Choose operatives for your team by checking the boxes next to their names.
+3. Select weapons for each operative.
+4. Click the "Generate Summary" button to create a printable summary of your kill team.
 
-### `npm test`
+## Contributing
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+We welcome contributions to ServoSummary-KT! If you have suggestions for improvements or encounter any issues, please feel free to open an issue or submit a pull request.
 
-### `npm run build`
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Acknowledgments
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- Data sourced from [Kill Team JSON](https://github.com/vjosset/killteamjson)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Project Link: [https://github.com/yourusername/servo-summary-kt](https://github.com/yourusername/servo-summary-kt)
 
-### `npm run eject`
+---
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Made with ❤️ for the Warhammer 40,000: Kill Team community
