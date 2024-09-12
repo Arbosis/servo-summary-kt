@@ -1,8 +1,6 @@
 # ServoSummary-KT
 
-ServoSummary-KT is a React-based web application designed to help Warhammer 40,000: Kill Team players create and manage their kill team rosters. This tool provides an intuitive interface for selecting operatives, managing their equipment, and generating printable summaries for game sessions.
-
-![ServoSummary-KT Screenshot](https://raw.githubusercontent.com/yourusername/servo-summary-kt/main/screenshot.png)
+ServoSummary-KT is a React-based web application that generates minimalistic print-friendly Kill Team summaries.
 
 ## Features
 
