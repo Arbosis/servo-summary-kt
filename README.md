@@ -29,9 +29,3 @@ We welcome contributions to ServoSummary-KT! If you have suggestions for improve
 ## Acknowledgments
 
 - Data sourced from [Kill Team JSON](https://github.com/vjosset/killteamjson)
-
-Project Link: [https://github.com/yourusername/servo-summary-kt](https://github.com/yourusername/servo-summary-kt)
-
----
-
-Made with ❤️ for the Warhammer 40,000: Kill Team community
