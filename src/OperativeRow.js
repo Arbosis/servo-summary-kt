@@ -4,7 +4,7 @@ import OperativeStats from './OperativeStats'; // Import the OperativeStats comp
 const OperativeRow = ({ operative, toggleOperative, toggleWeapon }) => {
   return (
     <tr>
-      <td>
+      <td style={{ flex: '0 0 content' }}>
         <div className="operative-name">
           <input
             type="checkbox"
@@ -16,7 +16,7 @@ const OperativeRow = ({ operative, toggleOperative, toggleWeapon }) => {
         </div>
         <OperativeStats stats={operative.stats} />
       </td>
-      <td>
+      <td style={{width: '100%' }}>
         <div className="weapon-grid">
           {operative.weapons.map((weapon, weaponIndex) => (
             <div key={weaponIndex} className="weapon-item">
