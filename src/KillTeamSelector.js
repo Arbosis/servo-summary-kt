@@ -94,10 +94,43 @@ const KillTeamSelector = () => {
     } : op));
   };
 
-  const generateSummary = () => {
+  const PrintAsPDF = () => {
+    // Create an iframe element
+    const iframe = document.createElement('iframe');
+    
+    // Set iframe to be invisible
+    iframe.style.position = 'absolute';
+    iframe.style.width = '0px';
+    iframe.style.height = '0px';
+    iframe.style.border = 'none';
+    
+    // Append iframe to the document body
+    document.body.appendChild(iframe);
+
+    // Write the HTML content to the iframe
+    iframe.contentWindow.document.open();
+    iframe.contentWindow.document.write(generateSummaryHTML());
+    iframe.contentWindow.document.close();
+
+    // Wait for the iframe content to load, then print
+    iframe.contentWindow.focus();
+    setTimeout(() => {
+        iframe.contentWindow.print();
+        document.body.removeChild(iframe);  // Clean up iframe after printing
+    }, 50);
+};
+
+  const openSummaryNewTab = () => {
     if (!selectedTeam) return;
   
     const summaryWindow = window.open('', '_blank');
+    summaryWindow.document.write(generateSummaryHTML());
+    summaryWindow.document.close();
+
+  };
+
+  const generateSummaryHTML = () => {
+    if (!selectedTeam) return;
   
     let summaryHTML = `
       <html>
@@ -114,11 +147,9 @@ const KillTeamSelector = () => {
       </html>
     `;
   
-    summaryWindow.document.write(summaryHTML);
-    summaryWindow.document.close();
+    return summaryHTML;
   };
   
-
   const generateOperativesTable = (operatives) => {
     let tableHTML = ``;
 
@@ -244,8 +275,13 @@ const KillTeamSelector = () => {
             ))}
           </select>
           {selectedTeam && (
-            <button onClick={generateSummary} className="generate-summary-button">
-              Generate Summary
+            <button onClick={openSummaryNewTab} className="generate-summary-button">
+              Web Summary
+            </button>
+          )}
+          {selectedTeam && (
+            <button onClick={PrintAsPDF} className="generate-summary-button">
+              PDF Summary
             </button>
           )}
         </div>
