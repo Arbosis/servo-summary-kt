@@ -142,14 +142,6 @@ body {
   font-size: 12px;
 }
 
-.ability-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-  gap: 3px;
-  padding-left: 10px;
-  border-bottom: 1px solid var(--border-color);
-}
-
 .ploy-table {
   width: 100%;
   border-collapse: separate;

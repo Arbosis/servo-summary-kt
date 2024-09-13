@@ -30,13 +30,6 @@ const OperativeRow = ({ operative, toggleOperative, toggleWeapon, toggleOpAbilit
                 <span>{weapon.name}</span>
               </div>
             ))}
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <td></td>
-        <td>
-          <div className="ability-grid">
             {operative.abilities.map((ability, abilityIndex) => (
               <div key={abilityIndex} className="weapon-item">
                 <input
@@ -49,8 +42,8 @@ const OperativeRow = ({ operative, toggleOperative, toggleWeapon, toggleOpAbilit
               </div>
             ))}
           </div>
+
         </td>
-        
       </tr>
     </React.Fragment>
   );

@@ -78,9 +78,10 @@ const generateSummaryHTML = (operatives, stratPloys, tacPloys) => {
                 <th class="name" colspan="2">Unique Abilities</th>
               </tr>
               ${operative.abilities
+                .filter(ability => ability.checked)
                 .map(ability => `
                   <tr>
-                    <td class="name">${ability.name}</td>
+                    <td class="name">${ability.title}</td>
                     <td class="desc">${ability.description}</td>
                   </tr>
                 `).join('')}
