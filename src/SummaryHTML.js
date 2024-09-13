@@ -80,7 +80,7 @@ const generateSummaryHTML = (operatives, stratPloys, tacPloys) => {
               ${operative.abilities
                 .map(ability => `
                   <tr>
-                    <td class="name">${ability.title}</td>
+                    <td class="name">${ability.name}</td>
                     <td class="desc">${ability.description}</td>
                   </tr>
                 `).join('')}

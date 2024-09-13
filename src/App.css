@@ -91,16 +91,7 @@ body {
 
 .operative-table th, .operative-table td {
   text-align: left;
-  border-bottom: 1px solid var(--border-color);
   padding: 2px;
-}
-
-.operative-name {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  font-weight: 600;
-  flex: 0 0 content;
 }
 
 .operative-table th {
@@ -111,6 +102,13 @@ body {
   letter-spacing: 0.03em;
 }
 
+.operative-name {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 600;
+  flex: 0 0 content;
+}
 /* Styles for the operative stat table */
 .operative-stats {
   margin-top: 4px;
@@ -123,7 +121,7 @@ body {
 .operative-stats td, .operative-stats th {
   padding: 1px 6px;
   text-align: center;
-  border: 1px solid gray;
+  border: 1px solid #e0e0e0;
 }
 
 .checkbox {
@@ -142,6 +140,14 @@ body {
   align-items: center;
   gap: 3px;
   font-size: 12px;
+}
+
+.ability-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 3px;
+  padding-left: 10px;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .ploy-table {

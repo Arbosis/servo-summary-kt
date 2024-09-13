@@ -57,7 +57,8 @@ const KillTeamSelector = () => {
           ),
           abilities: op.abilities.map(ability => ({
             title: ability.title,
-            description: ability.description
+            description: ability.description,
+            checked: true
           })) || [],
           checked: true
         }))
@@ -91,6 +92,13 @@ const KillTeamSelector = () => {
     setOperatives(ops => ops.map((op, i) => i === opIndex ? {
       ...op,
       weapons: op.weapons.map((w, j) => j === weaponIndex ? { ...w, checked: !w.checked } : w)
+    } : op));
+  };
+
+  const toggleOpAbilitySelection = (opIndex, abilityIndex) => {
+    setOperatives(ops => ops.map((op, i) => i === opIndex ? {
+      ...op,
+      abilities: op.abilities.map((w, j) => j === abilityIndex ? { ...w, checked: !w.checked } : w)
     } : op));
   };
 
@@ -172,6 +180,7 @@ const KillTeamSelector = () => {
                   operative={operative}
                   toggleOperative={() => toggleOperativeSelection(opIndex)}
                   toggleWeapon={(weaponIndex) => toggleWeaponSelection(opIndex, weaponIndex)}
+                  toggleOpAbility={(abilityIndex) => toggleOpAbilitySelection(opIndex, abilityIndex)}
                 />
               ))}
             </tbody>
