@@ -75,8 +75,7 @@ const generateSummaryHTML = (operatives, stratPloys, tacPloys) => {
           <table class="abilityList">
             <tbody>
               <tr>
-                <th>Name</th>
-                <th>Description</th>
+                <th class="name" colspan="2">Unique Abilities</th>
               </tr>
               ${operative.abilities
                 .map(ability => `
