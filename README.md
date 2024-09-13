@@ -2,6 +2,8 @@
 
 ServoSummary-KT is a React-based web application that generates minimalistic print-friendly Kill Team summaries.
 
+Try it now at [https://arbosis.github.io/servo-summary-kt/](https://arbosis.github.io/servo-summary-kt/)
+
 ## Features
 
 - Select from a list of Kill Teams from publicly updated data
