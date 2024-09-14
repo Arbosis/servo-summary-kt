@@ -3,6 +3,7 @@
   --background-color: #f8f9fa;
   --text-color: #333;
   --border-color: #ddd;
+  --border-radius-default: 5px;
   --hover-color: #2980b9;
   --table-header-bg: #f1f3f5;
   --font-size-default: 13px;
@@ -103,27 +104,25 @@ body {
 
 .editorOperative {
   width: 100%;
-  border: var(--border-color) 1px solid;
-  padding-bottom: 10px;
-
-  /* .operative-name {
-    display: inline-block;
-    vertical-align: top;
-    border: 0px solid var(--border-color);
-    padding: 0px 20px;
-    text-align: left;
-    font-weight: 600;
-    font-size: var(--font-size-big);
-    text-transform: uppercase;
-  } */
+  border: 1px var(--border-color) solid;
+  border-radius: var(--border-radius-default);
+  /* padding: 5px; */
+  margin-bottom: 30px;
+  overflow: auto;
+  justify-content: center;
+  align-items: center;
 
   .operative-stats {
     display: table;
+    max-width: 100vw;
+    width: 100%;
+    margin: auto;
+    overflow: auto;
+    table-layout: fixed;
     font-size: var(--font-size-small);
     border-collapse: separate;
     border-spacing: 0;
-    table-layout: fixed;
-    width: 100%;
+    border-radius: var(--border-radius-default);
     th {
       background-color: var(--table-header-bg);
     }

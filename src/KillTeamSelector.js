@@ -169,22 +169,27 @@ const KillTeamSelector = () => {
   const teamEditor = () => {
     return (
       <>
-          <table className="operativeList-table">
+
+        Operative editor
+
+        {operatives.map((operative, opIndex) => (
+          <RenderOperative
+            key={opIndex}
+            operative={operative}
+            toggleOperative={() => toggleOperativeSelection(opIndex)}
+            toggleWeapon={(weaponIndex) => toggleWeaponSelection(opIndex, weaponIndex)}
+            toggleOpAbility={(abilityIndex) => toggleOpAbilitySelection(opIndex, abilityIndex)}
+          />
+        ))}
+
+          {/* <table className="operativeList-table">
             <thead>
               <tr><th>Operative editor</th></tr>
             </thead>
             <tbody>
-              {operatives.map((operative, opIndex) => (
-                <RenderOperative
-                  key={opIndex}
-                  operative={operative}
-                  toggleOperative={() => toggleOperativeSelection(opIndex)}
-                  toggleWeapon={(weaponIndex) => toggleWeaponSelection(opIndex, weaponIndex)}
-                  toggleOpAbility={(abilityIndex) => toggleOpAbilitySelection(opIndex, abilityIndex)}
-                />
-              ))}
+              
             </tbody>
-          </table>
+          </table> */}
           
           <PloysTable ploys={stratPloys} tableName="Strat Ploys"/>
           <PloysTable ploys={tacPloys} tableName="Tac Ploys"/>
