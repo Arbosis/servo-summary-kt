@@ -1,7 +1,7 @@
 import React from 'react';
 import OperativeStats from './OperativeStats'; // Import the OperativeStats component
 
-const OperativeRow = ({ operative, toggleOperative, toggleWeapon, toggleOpAbility }) => {
+const RenderOperative = ({ operative, toggleOperative, toggleWeapon, toggleOpAbility }) => {
   return (
     <React.Fragment>
       <tr>
@@ -49,4 +49,4 @@ const OperativeRow = ({ operative, toggleOperative, toggleWeapon, toggleOpAbilit
   );
 };
 
-export default OperativeRow;
+export default RenderOperative;

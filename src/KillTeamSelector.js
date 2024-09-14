@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useKillTeams } from './useKillTeams'; // Custom hook for fetching kill teams
-import OperativeRow from './OperativeRow'; 
+import RenderOperative from './RenderOperative'; 
 import PloysTable from './PloysTable';
 import SummaryHTML from './SummaryHTML';
 
@@ -135,47 +135,46 @@ const KillTeamSelector = () => {
     // summaryWindow.document.write(generateSummaryHTML());
     summaryWindow.document.write(SummaryHTML(operatives, stratPloys, tacPloys));
     summaryWindow.document.close();
-
   };
 
-  if (isLoading) return <div>Loading kill teams...</div>;
-  if (error) return <div>{error}</div>;
-
-  return (
-    <div className="container">
+  const TopBar = () => {
+    return (
       <div className="top-bar">
-        <h1 className="app-title">ServoSummary-KT</h1>
-        <div className="controls">
-          <select onChange={handleKillTeamSelection} className="team-selector">
-            <option value="">Select a Kill Team</option>
-            {killTeams.map(team => (
-              <option key={team.killteamname} value={team.killteamname}>
-                {team.factionName} - {team.killteamname}
-              </option>
-            ))}
-          </select>
-          {selectedTeam && (
-            <button onClick={openSummaryNewTab} className="generate-summary-button">
-              Web Summary
-            </button>
-          )}
-          {selectedTeam && (
-            <button onClick={PrintAsPDF} className="generate-summary-button">
-              PDF Summary
-            </button>
-          )}
-        </div>
-      </div> 
-      
-      {selectedTeam && (
-        <>
+          <h1 className="app-title">ServoSummary-KT</h1>
+          <div className="controls">
+            <select onChange={handleKillTeamSelection} className="team-selector">
+              <option value="">Select a Kill Team</option>
+              {killTeams.map(team => (
+                <option key={team.killteamname} value={team.killteamname}>
+                  {team.factionName} - {team.killteamname}
+                </option>
+              ))}
+            </select>
+            {selectedTeam && (
+              <button onClick={openSummaryNewTab} className="generate-summary-button">
+                Web Summary
+              </button>
+            )}
+            {selectedTeam && (
+              <button onClick={PrintAsPDF} className="generate-summary-button">
+                PDF Summary
+              </button>
+            )}
+          </div>
+        </div> 
+    );
+  }
+
+  const teamEditor = () => {
+    return (
+      <>
           <table className="operative-table">
             <thead>
               <tr><th>Operative</th><th>Weapons</th></tr>
             </thead>
             <tbody>
               {operatives.map((operative, opIndex) => (
-                <OperativeRow
+                <RenderOperative
                   key={opIndex}
                   operative={operative}
                   toggleOperative={() => toggleOperativeSelection(opIndex)}
@@ -189,7 +188,17 @@ const KillTeamSelector = () => {
           <PloysTable ploys={stratPloys} tableName="Strat Ploys"/>
           <PloysTable ploys={tacPloys} tableName="Tac Ploys"/>
         </>
-      )}
+    );
+  }
+
+  if (isLoading) return <div>Loading kill teams...</div>;
+  if (error) return <div>{error}</div>;
+
+  return (
+    <div className="container">
+      <TopBar />
+      
+      {selectedTeam && ( teamEditor() )}
 
     </div>
   );
