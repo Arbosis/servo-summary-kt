@@ -13,11 +13,14 @@
   --bg-alternate: #f5f5f5;
   --border-color: #999;
   --border-soft-color: #e0e0e0;
+  --default-row-padding: 2px;
   --font-bold: 700;
   --fontName: Fira Sans Condensed;
   --font-size-normal: 11;
   --fontNameTitle: Fira Sans Condensed;
-  --font-size-title: 13;
+  --font-size-title: 14;
+  --card-border: 1px solid var(--border-color);
+  --section-top-border: 2px solid var(--border-color);
 }
 
 * {
@@ -37,7 +40,7 @@ ul {
   margin-bottom: 4px;
   /* border-radius: 6px;
   box-shadow: 0 1px 3px rgba(0,0,0,0.5); */
-  border: 1px solid var(--border-color);
+  border: var(--card-border);
   page-break-inside: avoid;
 }
 
@@ -46,12 +49,11 @@ table {
   border-collapse: collapse;
 }
 th, td {
-    padding: 2px;
+    padding: var(--default-row-padding);
 }
 th {
   text-transform: uppercase;
   background-color: var(--header-bg);
-  /* border-top: 2px solid var(--border-color); */
   font-weight: var(--font-bold);
 }
 tr {
@@ -65,7 +67,7 @@ table .noprint {
 /* SINGLE OPERATIVE */
 table.operative {
   text-align: center;
-  border-bottom: 1px solid var(--border-color);
+  border-top: var(--section-top-border);
 }
 table.operative .Name{
   width: 30%;
@@ -79,6 +81,8 @@ table.operative .Name{
 table.weapon {
   text-align: center;
   table-layout: fixed;
+  border-top: var(--section-top-border);
+  /* border-top: 0px; */
 }
 table.weapon th{
   background-color: var(--header-bg);
@@ -124,9 +128,10 @@ table.eqtable td:first-child{
 
 /* ABILITIES */
 table.abilityList{
-  text-align: center;
+  text-align: left;
   table-layout: auto;
   font-size: var(--font-size-normal);
+  border-top: var(--section-top-border);
 }
 table.abilityList th.name{
   text-align: left;
