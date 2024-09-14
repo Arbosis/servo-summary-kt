@@ -141,7 +141,7 @@ const KillTeamSelector = () => {
   const TopBar = () => {
     return (
       <div className="top-bar">
-          <h1 className="app-title">ServoSummary-KT</h1>
+          <h1 className="app-title">ServoSummary</h1>
           <div className="controls">
             <select onChange={handleKillTeamSelection} className="team-selector">
               <option value="">Select a Kill Team</option>
@@ -151,16 +151,19 @@ const KillTeamSelector = () => {
                 </option>
               ))}
             </select>
-            {selectedTeam && (
-              <button onClick={openSummaryNewTab} className="generate-summary-button">
-                Web Summary
-              </button>
-            )}
-            {selectedTeam && (
-              <button onClick={PrintAsPDF} className="generate-summary-button">
-                PDF Summary
-              </button>
-            )}
+            <div className='generateMenu'>
+              Generate summary:
+              {selectedTeam && (
+                <button onClick={openSummaryNewTab} className="generate-summary-button">
+                  Web
+                </button>
+              )} 
+              {selectedTeam && (
+                <button onClick={PrintAsPDF} className="generate-summary-button">
+                  PDF
+                </button>
+              )}
+            </div>
           </div>
         </div> 
     );
@@ -170,7 +173,7 @@ const KillTeamSelector = () => {
     return (
       <>
 
-        Operative editor
+        <div class="operativeEditorTitle">Operative editor</div>
 
         {operatives.map((operative, opIndex) => (
           <RenderOperative
@@ -181,15 +184,6 @@ const KillTeamSelector = () => {
             toggleOpAbility={(abilityIndex) => toggleOpAbilitySelection(opIndex, abilityIndex)}
           />
         ))}
-
-          {/* <table className="operativeList-table">
-            <thead>
-              <tr><th>Operative editor</th></tr>
-            </thead>
-            <tbody>
-              
-            </tbody>
-          </table> */}
           
           <PloysTable ploys={stratPloys} tableName="Strat Ploys"/>
           <PloysTable ploys={tacPloys} tableName="Tac Ploys"/>

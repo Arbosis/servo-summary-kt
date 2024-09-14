@@ -5,7 +5,7 @@
   --border-color: #ddd;
   --border-radius-default: 5px;
   --hover-color: #2980b9;
-  --table-header-bg: #f1f3f5;
+  --table-header-bg: #eee;
   --font-size-default: 13px;
   --font-size-big: 14px;
   --font-size-small: 11px;
@@ -35,6 +35,24 @@ body {
   padding: 15px;
   border-radius: 8px;
   box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+
+  .generateMenu {
+    display: block;
+  }
+  .generateMenu > *{
+    margin: 2px;
+  }
+
+  .generate-summary-button {
+    padding: 8px 12px;
+    font-size: 14px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
 }
 
 .app-title {
@@ -66,48 +84,31 @@ body {
   background-size: 10px auto;
 }
 
-.generate-summary-button {
-  padding: 8px 12px;
-  font-size: 14px;
-  background-color: var(--primary-color);
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
+
 
 .generate-summary-button:hover {
   background-color: var(--hover-color);
 }
 
-.operativeList-table {
-  width: 100%;
-  border-collapse: separate;
-  border-spacing: 0;
-  background-color: white;
-  border-radius: 6px;
-  overflow: hidden;
+.operativeEditorTitle {
+  background-color: var(--table-header-bg);
   box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-  margin-bottom: 15px;
   font-size: var(--font-size-default);
-  padding: 8px;
-
-  /* th {
-    background-color: var(--table-header-bg);
-    font-weight: 600;
-    text-transform: uppercase;
-    font-size: 11px;
-    letter-spacing: 0.03em;
-  } */
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 600;
+  border-radius: 6px;
+  margin-bottom: 10px;
 }
+
+
 
 .editorOperative {
   width: 100%;
-  border: 1px var(--border-color) solid;
   border-radius: var(--border-radius-default);
-  /* padding: 5px; */
-  margin-bottom: 30px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  margin-bottom: 10px;
+  background-color: white;
   overflow: auto;
   justify-content: center;
   align-items: center;
@@ -127,7 +128,7 @@ body {
       background-color: var(--table-header-bg);
     }
     td, th {
-      border: 1px solid var(--border-color);
+      border: 1px solid var(--table-header-bg);
       text-align: center;
       vertical-align: top;
     }
@@ -172,24 +173,26 @@ body {
   margin-bottom: 15px;
   font-size: 13px;
   padding: 8px;
-}
 
-.ploy-table th {
-  background-color: var(--table-header-bg);
-  font-weight: 600;
-}
+  th {
+    background-color: var(--table-header-bg);
+    font-weight: 600;
+    text-align: left;
+  }
 
-.ploy-table td {
-  border-bottom: 1px solid var(--border-color);
-}
+  td {
+    border-bottom: 1px solid var(--border-color);
+  }
 
-.ploy-table .name {
-  font-weight: 600;
-  width: 10%;
-}
+  .name {
+    font-weight: 600;
+    width: 10%;
+    vertical-align: top;
+  }
 
-.ploy-table .desc {
-  width: 90%;
+  .desc {
+    width: 90%;
+  }
 }
 
 @media (min-width: 768px) {
