@@ -6,8 +6,8 @@ import SummaryHTML from './SummaryHTML';
 
 // Weapon icons
 const weaponIcons = {
-  M: '⚔️', // Monochrome sword for Melee weapon
-  R: '🔫', // Monochrome cross for Range weapon
+  M: '⚔️',
+  R: "🔫",
 };
 
 // Mapping shape tokens to Unicode characters
@@ -51,6 +51,7 @@ const KillTeamSelector = () => {
                 BS: profile.BS,
                 D: profile.D,
                 SR: replaceShapeTokens(profile.SR),
+                type: weapon.weptype,
               },
               checked: weapon.isdefault === 1
             }))
@@ -168,9 +169,9 @@ const KillTeamSelector = () => {
   const teamEditor = () => {
     return (
       <>
-          <table className="operative-table">
+          <table className="operativeList-table">
             <thead>
-              <tr><th>Operative</th><th>Weapons</th></tr>
+              <tr><th>Operative editor</th></tr>
             </thead>
             <tbody>
               {operatives.map((operative, opIndex) => (

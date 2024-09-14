@@ -2,13 +2,17 @@
   --primary-color: #3498db;
   --background-color: #f8f9fa;
   --text-color: #333;
-  --border-color: #e0e0e0;
+  --border-color: #ddd;
   --hover-color: #2980b9;
   --table-header-bg: #f1f3f5;
+  --font-size-default: 13px;
+  --font-size-big: 14px;
+  --font-size-small: 11px;
+  --font-family-default: 'Arial', sans-serif;
 }
 
 body {
-  font-family: 'Arial', sans-serif;
+  font-family: var(--font-family-default);
   line-height: 1.4;
   color: var(--text-color);
   background-color: var(--background-color);
@@ -76,7 +80,7 @@ body {
   background-color: var(--hover-color);
 }
 
-.operative-table {
+.operativeList-table {
   width: 100%;
   border-collapse: separate;
   border-spacing: 0;
@@ -85,47 +89,63 @@ body {
   overflow: hidden;
   box-shadow: 0 1px 3px rgba(0,0,0,0.1);
   margin-bottom: 15px;
-  font-size: 13px;
+  font-size: var(--font-size-default);
   padding: 8px;
+
+  /* th {
+    background-color: var(--table-header-bg);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 11px;
+    letter-spacing: 0.03em;
+  } */
 }
 
-.operative-table th, .operative-table td {
-  text-align: left;
-  padding: 2px;
-}
+.editorOperative {
+  width: 100%;
+  border: var(--border-color) 1px solid;
+  padding-bottom: 10px;
 
-.operative-table th {
-  background-color: var(--table-header-bg);
-  font-weight: 600;
-  text-transform: uppercase;
-  font-size: 11px;
-  letter-spacing: 0.03em;
-}
+  /* .operative-name {
+    display: inline-block;
+    vertical-align: top;
+    border: 0px solid var(--border-color);
+    padding: 0px 20px;
+    text-align: left;
+    font-weight: 600;
+    font-size: var(--font-size-big);
+    text-transform: uppercase;
+  } */
 
-.operative-name {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  font-weight: 600;
-  flex: 0 0 content;
-}
-/* Styles for the operative stat table */
-.operative-stats {
-  margin-top: 4px;
-  font-size: 11px;
-  border-collapse: collapse;
-  padding: 2px;
-  /* background-color: #AAA; */
-}
-
-.operative-stats td, .operative-stats th {
-  padding: 1px 6px;
-  text-align: center;
-  border: 1px solid #e0e0e0;
+  .operative-stats {
+    display: table;
+    font-size: var(--font-size-small);
+    border-collapse: separate;
+    border-spacing: 0;
+    table-layout: fixed;
+    width: 100%;
+    th {
+      background-color: var(--table-header-bg);
+    }
+    td, th {
+      border: 1px solid var(--border-color);
+      text-align: center;
+      vertical-align: top;
+    }
+    .name {
+      width: 30%;
+      text-align: left;
+      font-size: var(--font-size-big);
+      font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+  }
 }
 
 .checkbox {
-  margin: 0;
+  margin: 5px;
+  vertical-align: middle;
 }
 
 .weapon-grid {
