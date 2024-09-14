@@ -14,8 +14,8 @@ const RenderOperative = ({ operative, toggleOperative, toggleWeapon, toggleOpAbi
               className="checkbox"
             />
             <span>{operative.name}</span>
+            <OperativeStats stats={operative.stats} />
           </div>
-          <OperativeStats stats={operative.stats} />
         </td>
         <td style={{width: '100%' }}>
           <div className="weapon-grid">
