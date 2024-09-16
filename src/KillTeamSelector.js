@@ -3,6 +3,7 @@ import { useKillTeams } from './useKillTeams'; // Custom hook for fetching kill 
 import RenderOperative from './RenderOperative'; 
 import PloysTable from './PloysTable';
 import SummaryHTML from './SummaryHTML';
+import ToggleBox from './ToggleBox';
 
 // Weapon icons
 const weaponIcons = {
@@ -25,6 +26,8 @@ const KillTeamSelector = () => {
   const [operatives, setOperatives] = useState([]);
   const [stratPloys, setStratPloys] = useState([]);
   const [tacPloys, setTacPloys] = useState([]);
+  const [showPreview, setShowPreview] = useState(false);
+  const toggleShowPreview = () => setShowPreview(!showPreview);
 
   const handleKillTeamSelection = (event) => {
     const teamName = event.target.value;
@@ -139,61 +142,64 @@ const KillTeamSelector = () => {
     summaryWindow.document.close();
   };
 
+
+const EditorControls = () => {
+  return (
+    <div className="controls">
+        {/* This section hides when no team is selected */}
+        <div className='generateMenu'>
+        {selectedTeam && (
+          <>
+            {/* Generate buttons */}
+            Generate summary:
+            <button onClick={openSummaryNewTab} className="generate-summary-button">
+              Web
+            </button>
+            <button onClick={PrintAsPDF} className="generate-summary-button">
+              PDF
+            </button>
+            {/* Edit/preview toggle */}
+            <ToggleBox text1="Editor" text2="Preview" onChangeHandle={toggleShowPreview}/>
+          </>
+        )}
+        </div>
+      </div>
+  )
+}
+
   const TopBar = () => {
     return (
       <div className="top-bar">
+          {/* App title */}
           <h1 className="app-title">ServoSummary</h1>
-          <div className="controls">
-            <select onChange={handleKillTeamSelection} className="team-selector">
-              <option value="">Select a Kill Team</option>
-              {killTeams.map(team => (
-                <option key={team.killteamname} value={team.killteamname}>
-                  {team.factionName} - {team.killteamname}
-                </option>
-              ))}
-            </select>
-            <div className='generateMenu'>
-            {selectedTeam && (
-              <>
-                Generate summary:
-                <button onClick={openSummaryNewTab} className="generate-summary-button">
-                  Web
-                </button>
-                <button onClick={PrintAsPDF} className="generate-summary-button">
-                  PDF
-                </button>
-              </>
-            )}
-            </div>
-          </div>
+          {/* Team select dropdown */}
+          <select onChange={handleKillTeamSelection} className="team-selector">
+            <option value="">Select a Kill Team</option>
+            {killTeams.map(team => (
+              <option key={team.killteamname} value={team.killteamname}>
+                {team.factionName} - {team.killteamname}
+              </option>
+            ))}
+          </select>
         </div> 
     );
   }
 
-  const [showPreview, setShowPreview] = useState(false);
-
-  const teamToolbar = () => {
-    const toggleShowPreview = () => setShowPreview(!showPreview);
-
+  const editorToolbar = () => {
     return (
-      <div className="teamToolbar">
+      <div className="editorToolbar">
+        {/* Generate buttons */}
         <span>
-          Editor
-          <label className="switch">
-            <input type="checkbox" checked={showPreview} onChange={toggleShowPreview} />
-            <span className="slider round"></span>
-          </label>
-          Preview
+        Generate summary:
+        <button onClick={openSummaryNewTab}>
+          Web
+        </button>
+        <button onClick={PrintAsPDF}>
+          PDF
+        </button> 
         </span>
-        {/* <span>
-          Generate summary:
-          <button onClick={openSummaryNewTab} className="generate-summary-button">
-            Web
-          </button>
-          <button onClick={PrintAsPDF} className="generate-summary-button">
-            PDF
-          </button>
-        </span> */}
+        {/* Edit/preview toggle */}
+        <ToggleBox text1="Editor" text2="Preview" onChangeHandle={toggleShowPreview}/>
       </div>
     );
   }
@@ -238,7 +244,7 @@ const KillTeamSelector = () => {
       {TopBar()}
       {selectedTeam && (
         <>
-          {teamToolbar()}
+          {editorToolbar()}
 
           {showPreview ? (
             summaryPreviewView(operatives, stratPloys, tacPloys)
