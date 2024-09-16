@@ -6,9 +6,6 @@ const generateSummaryHTML = (operatives, stratPloys, tacPloys) => {
         <head>
           <title>Kill Team Summary</title>
           <link rel="stylesheet" type="text/css" href="${process.env.PUBLIC_URL}/summaryStyles.css">
-          <style>
-            /* Additional inline styles if needed */
-          </style>
         </head>
         <body>
           ${generateOperativesTable(operatives, stratPloys, tacPloys)}
@@ -48,10 +45,10 @@ const generateSummaryHTML = (operatives, stratPloys, tacPloys) => {
             </tbody>
           </table>
           ${operative.weapons.some(weapon => weapon.checked) ? `
-          <table class="weapon">
+          <table class="opWeapons">
             <tbody>
               <tr>
-                <th class="name">Name</th>
+                <th class="name">Weapon</th>
                 <th class="bs">Skill</th>
                 <th class="attack">A</th>
                 <th class="damage">D</th>
@@ -72,7 +69,7 @@ const generateSummaryHTML = (operatives, stratPloys, tacPloys) => {
           </table>
           ` : ``}
           ${operative.abilities.length ? `
-          <table class="abilityList">
+          <table class="opAbilities">
             <tbody>
               <tr>
                 <th class="name" colspan="2">Unique Abilities</th>
@@ -94,34 +91,37 @@ const generateSummaryHTML = (operatives, stratPloys, tacPloys) => {
     });
 
     tableHTML += `
-    <table class="abilityList">
-      <tbody>
-        <tr>
-          <th class="name">Strategic Ploys</th>
-          <th class="desc">Description</th>
-        </tr>
-        ${stratPloys.map(p => `
+    <div class="abilityList">
+      <table>
+        <tbody>
           <tr>
-            <td class="name">${p.name} (${p.CP} CP)</td>
-            <td class="desc">${p.description}</td>
+            <th class="name" colspan="2">Strategic Ploys</th>
           </tr>
-        `).join('')}
-      </tbody>
-    </table>
-    <table class="abilityList">
-      <tbody>
-        <tr>
-          <th class="name">Tactical Ploys</th>
-          <th class="desc">Description</th>
-        </tr>
-        ${tacPloys.map(p => `
+          ${stratPloys.map(p => `
+            <tr>
+              <td class="name">${p.name} (${p.CP} CP)</td>
+              <td class="desc">${p.description}</td>
+            </tr>
+          `).join('')}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="abilityList">
+      <table>
+        <tbody>
           <tr>
-            <td class="name">${p.name} (${p.CP} CP)</td>
-            <td class="desc">${p.description}</td>
+            <th class="name" colspan="2">Tactical Ploys</th>
           </tr>
-        `).join('')}
-      </tbody>
-    </table>
+          ${tacPloys.map(p => `
+            <tr>
+              <td class="name">${p.name} (${p.CP} CP)</td>
+              <td class="desc">${p.description}</td>
+            </tr>
+          `).join('')}
+        </tbody>
+      </table>
+    </div>
     `;
 
     return tableHTML;

@@ -198,7 +198,7 @@ const KillTeamSelector = () => {
     );
   }
 
-  const teamEditor = () => {
+  const teamEditorView = () => {
     return (
       <>
         <div className="teamEditor">
@@ -219,7 +219,7 @@ const KillTeamSelector = () => {
     );
   };
 
-  const showSummaryPreview = (operatives, stratPloys, tacPloys) => (
+  const summaryPreviewView = (operatives, stratPloys, tacPloys) => (
     <iframe
       className="teamSummary"
       srcDoc={SummaryHTML(operatives, stratPloys, tacPloys)}
@@ -241,9 +241,9 @@ const KillTeamSelector = () => {
           {teamToolbar()}
 
           {showPreview ? (
-            showSummaryPreview(operatives, stratPloys, tacPloys)
+            summaryPreviewView(operatives, stratPloys, tacPloys)
           ) : (
-            teamEditor()
+            teamEditorView()
           )}
         </>
       )}

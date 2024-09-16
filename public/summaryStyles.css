@@ -9,148 +9,151 @@
 }
 
 :root {
-  --header-bg: #e6e6e6;
-  --bg-alternate: #f5f5f5;
-  --border-color: #999;
-  --border-soft-color: #e0e0e0;
-  --default-row-padding: 2px;
-  --font-bold: 700;
+  --header-bg: #dadada;
+  --border-color: var(--header-bg);
+  --border-color-dark: #cccccc;
+  --border-radius-default: 10px;
+  --card-border: 2px solid var(--border-color);
+  --section-top-border: 1px solid var(--border-color);
+  --box-shadow: 0 1px 3px rgba(0,0,0,0.2);
   --fontName: Fira Sans Condensed;
-  --font-size-normal: 11;
   --fontNameTitle: Fira Sans Condensed;
-  --font-size-title: 14;
-  --card-border: 1px solid var(--border-color);
-  --section-top-border: 2px solid var(--border-color);
+  --font-size-normal: 11px;
+  --font-size-title: 14px;
+  --font-bold: 700;
 }
 
-* {
+body {
   font-family: var(--fontName), 'Roboto', sans-serif;
   font-weight: 400;
-  font-size: var(--font-size-normal);
+  font-size: var(--font-size-normal) !important;
   vertical-align: top;
+
+  b, strong {
+    font-weight: var(--font-bold);
+  }
+  ul {
+    margin: 1px;
+  }
 }
-b, strong {
-  font-weight: var(--font-bold);
+
+.noprint {
+  display: none;
 }
-ul {
-  margin: 1px;
-}
+
 
 .Card {
-  margin-bottom: 4px;
-  /* border-radius: 6px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.5); */
-  border: var(--card-border);
   page-break-inside: avoid;
-}
-
-table {
+  overflow: hidden;
   width: 100%;
-  border-collapse: collapse;
-}
-th, td {
-    padding: var(--default-row-padding);
-}
-th {
-  text-transform: uppercase;
-  background-color: var(--header-bg);
-  font-weight: var(--font-bold);
-}
-tr {
-  border-bottom: 1px solid var(--border-soft-color);
+  margin-bottom: 4px;
+  border: var(--card-border);
+  border-radius: var(--border-radius-default);
+
+  table {
+    font-size: var(--font-size-normal);
+    border-collapse: separate;
+    border-spacing: 0;
+
+    th {
+      text-transform: uppercase;
+      background-color: var(--header-bg);
+      font-weight: var(--font-bold);
+    }
+  }
+
+  /* Card operative */
+  .operative {
+    display: table;
+    max-width: 100vw;
+    width: 100%;
+    text-align: center;
+    table-layout: fixed;
+    
+    .name{
+      width: 30%;
+      font-size: var(--font-size-title);
+      font-weight: var(--font-bold);
+      vertical-align: middle;
+    }
+  }
+
+  /* Card weapons */
+  .opWeapons {
+    display: table;
+    max-width: 100vw;
+    width: 100%;
+    text-align: center;
+    table-layout: auto;
+    border-top: var(--section-top-border);
+    
+    .name{
+      padding-left: 4px;
+      padding-right: 4px;
+      text-align: left;
+      font-weight: var(--font-bold);
+    }
+    .rules{
+      width: auto;
+    }
+  }
+  
+  /* Card abilities */
+  .opAbilities{
+    display: table;
+    max-width: 100vw;
+    width: 100%;
+    table-layout: auto;
+    border-top: var(--section-top-border);
+    text-align: left;
+    padding-bottom: 2px;
+
+    .name {
+      font-weight: var(--font-bold);
+      vertical-align: top;
+      padding-left: 4px;
+      padding-right: 4px;
+      min-width: max-content;
+    }
+    .desc {
+      width: 100%;
+    }
+  }
 }
 
-table .noprint {
-  display: none;
-}
+.abilityList{
+  page-break-inside: avoid;
+  overflow: hidden;
+  width: 100%;
+  margin-bottom: 4px;
+  border: var(--card-border);
+  border-radius: var(--border-radius-default);
 
-/* SINGLE OPERATIVE */
-table.operative {
-  text-align: center;
-  border-top: var(--section-top-border);
-}
-table.operative .Name{
-  width: 30%;
-  font-size: var(--font-size-title);
-  font-weight: var(--font-bold);
-  vertical-align: middle;
-  /* text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white; */
-}
+  table {
+    font-size: var(--font-size-normal);
+    border-collapse: separate;
+    border-spacing: 0;
+    
+    th {
+      text-transform: uppercase;
+      background-color: var(--header-bg);
+      font-weight: var(--font-bold);
+    }
+    td {
+      padding-bottom: 20px;
+    }
+  }
 
-/* WEAPONS */
-table.weapon {
-  text-align: center;
-  table-layout: fixed;
-  border-top: var(--section-top-border);
-  /* border-top: 0px; */
-}
-table.weapon th{
-  background-color: var(--header-bg);
-  font-weight: var(--font-bold);
-}
-table.weapon th.name{
-  /* width: 50%; */
-  text-align: left;
-  font-weight: var(--font-bold);
-}
-/* table.weapon tr:nth-child(even){
-  background-color: var(--bg-alternate);
-} */
-table.weapon td.name{
-  /* width: 50%; */
-  text-align: left;
-}
-table.weapon .type{
-  width: 12px;
-}
-table.weapon .bs,
-table.weapon .attack,
-table.weapon .damage{
-  width: 25px;
-}
-table.weapon .rules{
-  width: auto;
-}
+  .name {
+    font-weight: var(--font-bold);
+    text-align: left;
+    vertical-align: top;
+    padding-left: 4px;
+    padding-right: 4px;
+    min-width: max-content;
+  }
 
-table.eqtable {
-  table-layout: fixed;
-  /* border: 1px; */
-  border-bottom: 1px solid var(--header-bg);
-  text-align: center;
+  .desc {
+    width: 100%;
+  }
 }
-table.eqtable th{
-  width: auto;
-}
-table.eqtable th:first-child,
-table.eqtable td:first-child{
-  text-align: left;
-}
-
-/* ABILITIES */
-table.abilityList{
-  text-align: left;
-  table-layout: auto;
-  font-size: var(--font-size-normal);
-  border-top: var(--section-top-border);
-}
-table.abilityList th.name{
-  text-align: left;
-  font-weight: var(--font-bold);
-}
-table.abilityList td.name{
-  text-align: left;
-  font-weight: var(--font-bold);
-  max-width: 20%;
-}
-table.abilityList td.desc{
-  text-align: left;
-  font-size: var(--font-size-normal);
-}
-table.abilityList .noprint {
-  display: none;
-  font-size: var(--font-size-normal);
-}
-
-/* table.abilityList tr:nth-child(even){
-  background-color: var(--bg-alternate);
-} */

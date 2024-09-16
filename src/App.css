@@ -15,17 +15,15 @@
   --box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 }
 
-body {
-  font-family: var(--font-family-default);
-  line-height: 1.4;
-  color: var(--text-color);
-  background-color: var(--background-color);
-}
 
 .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 10px;
+  font-family: var(--font-family-default);
+  line-height: 1.4;
+  color: var(--text-color);
+  background-color: var(--background-color);
 }
 
 .top-bar {
@@ -40,10 +38,13 @@ body {
   box-shadow: var(--box-shadow);
   color: var(--primary-color);
 
-  .generateMenu {
-    display: none;
+  .app-title {
+    font-size: 22px;
+    font-weight: 300;
+    color: var(--primary-color);
+    margin: 0;
   }
-
+  
   .generateMenu {
     display: block;
   }
@@ -69,12 +70,6 @@ body {
 
 
 
-.app-title {
-  font-size: 22px;
-  font-weight: 300;
-  color: var(--primary-color);
-  margin: 0;
-}
 
 .controls {
   display: flex;
@@ -252,6 +247,7 @@ body {
     font-weight: 600;
     text-align: left;
     padding: 4px;
+    text-transform: uppercase;
   }
 
   td {
