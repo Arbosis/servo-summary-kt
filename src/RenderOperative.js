@@ -1,30 +1,12 @@
 import React from 'react';
 
-const OperativeStats = ({ stats }) => {
-  return (
-      <table className="operative-stats">
-        <thead>
-          <tr>
-            <th>M</th>
-            <th>APL</th>
-            <th>GA</th>
-            <th>Df</th>
-            <th>Sv</th>
-            <th>W</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>{stats.M}</td>
-            <td>{stats.APL}</td>
-            <td>{stats.GA}</td>
-            <td>{stats.DF}</td>
-            <td>{stats.SV}</td>
-            <td>{stats.W}</td>
-          </tr>
-        </tbody>
-      </table>
-  );
+const weaponTypeIcon = (type) => {
+  if (type === 'R') {
+    return "[R]";//<img src="/icon_crosshair.png" alt="Ranged" className="icon" />;
+  } else if (type === 'M') {
+    return "[M]";//<img src="./icon_melee.png" alt="Melee" className="icon" />;
+  }
+  return null;
 };
 
 const OperativeNameAndStats = ({ operative, toggleOperative }) => {
@@ -70,7 +52,10 @@ const RenderOperative = ({ operative, toggleOperative, toggleWeapon, toggleOpAbi
           {operative.weapons.map((weapon, weaponIndex) => (
             <div key={weaponIndex} className="weapon-item">
               <input type="checkbox" checked={weapon.checked} onChange={() => toggleWeapon(weaponIndex)} className="checkbox" />
-              <span>[{weapon.type}] {weapon.name}</span>
+              <span>
+                {weaponTypeIcon(weapon.type)}
+                {weapon.name}
+              </span>
             </div>
           ))}
         </div>
@@ -85,7 +70,7 @@ const RenderOperative = ({ operative, toggleOperative, toggleWeapon, toggleOpAbi
                 onChange={() => toggleOpAbility(abilityIndex)}
                 className="checkbox"
               />
-              <span>{ability.title}</span>
+              <span>[UA]{ability.title}</span>
             </div>
           ))}
         </div>
@@ -96,3 +81,4 @@ const RenderOperative = ({ operative, toggleOperative, toggleWeapon, toggleOpAbi
 };
 
 export default RenderOperative;
+

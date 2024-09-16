@@ -5,12 +5,6 @@ import PloysTable from './PloysTable';
 import SummaryHTML from './SummaryHTML';
 import ToggleBox from './ToggleBox';
 
-// Weapon icons
-const weaponIcons = {
-  M: '⚔️',
-  R: "🔫",
-};
-
 // Mapping shape tokens to Unicode characters
 const replaceShapeTokens = (text) => {
   return text
@@ -48,7 +42,6 @@ const KillTeamSelector = () => {
           },
           weapons: op.weapons.flatMap(weapon => 
             weapon.profiles.map(profile => ({
-              // name: `${weaponIcons[weapon.weptype] || ''} ${weapon.wepname}${profile.name ? ` (${profile.name})` : ''}`,
               name: `${weapon.wepname}${profile.name ? ` (${profile.name})` : ''}`,
               stats: {
                 A: profile.A,
