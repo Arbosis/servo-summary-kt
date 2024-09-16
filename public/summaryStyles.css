@@ -92,6 +92,7 @@ body {
       padding-right: 4px;
       text-align: left;
       font-weight: var(--font-bold);
+      max-width: 40%;
     }
     .rules{
       width: auto;
@@ -100,36 +101,41 @@ body {
   
   /* Card abilities */
   .opAbilities{
-    display: table;
+    display: inline-block;
     max-width: 100vw;
     width: 100%;
-    table-layout: auto;
     border-top: var(--section-top-border);
     text-align: left;
-    padding-bottom: 2px;
+    padding-bottom: 4px;
 
     .name {
       font-weight: var(--font-bold);
       vertical-align: top;
       padding-left: 4px;
       padding-right: 4px;
-      min-width: max-content;
     }
     .desc {
-      width: 100%;
+      vertical-align: top;
     }
   }
+}
+
+.abilityName {
+  font-weight: var(--font-bold);
 }
 
 .abilityList{
   page-break-inside: avoid;
   overflow: hidden;
   width: 100%;
+  
   margin-bottom: 4px;
   border: var(--card-border);
   border-radius: var(--border-radius-default);
-
+  text-align: left;
+  
   table {
+    width: 100%;
     font-size: var(--font-size-normal);
     border-collapse: separate;
     border-spacing: 0;
@@ -140,20 +146,9 @@ body {
       font-weight: var(--font-bold);
     }
     td {
-      padding-bottom: 5px;
+      padding-left: 4px;
+      padding-right: 4px;
+      padding-bottom: 6px;
     }
-  }
-
-  .name {
-    font-weight: var(--font-bold);
-    text-align: left;
-    vertical-align: top;
-    padding-left: 4px;
-    padding-right: 4px;
-    min-width: max-content;
-  }
-
-  .desc {
-    width: 100%;
   }
 }

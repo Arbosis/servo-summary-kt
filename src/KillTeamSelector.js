@@ -57,7 +57,8 @@ const KillTeamSelector = () => {
                 SR: replaceShapeTokens(profile.SR),
               },
               type: weapon.weptype,
-              checked: weapon.isdefault === 1
+              checked: true
+              // checked: weapon.isdefault === 1
             }))
           ),
           abilities: op.abilities.map(ability => ({

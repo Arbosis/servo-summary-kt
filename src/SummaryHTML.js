@@ -72,14 +72,13 @@ const generateSummaryHTML = (operatives, stratPloys, tacPloys) => {
           <table class="opAbilities">
             <tbody>
               <tr>
-                <th class="name" colspan="2">Unique Abilities</th>
+                <th class="name">Unique Abilities</th>
               </tr>
               ${operative.abilities
                 .filter(ability => ability.checked)
                 .map(ability => `
                   <tr>
-                    <td class="name">${ability.title}</td>
-                    <td class="desc">${ability.description}</td>
+                    <td><span class="abilityName">${ability.title}</span>  ${ability.description}</td>
                   </tr>
                 `).join('')}
             </tbody>
@@ -95,12 +94,11 @@ const generateSummaryHTML = (operatives, stratPloys, tacPloys) => {
       <table>
         <tbody>
           <tr>
-            <th class="name" colspan="2">Strategic Ploys</th>
+            <th class="name">Strategic Ploys</th>
           </tr>
           ${stratPloys.map(p => `
             <tr>
-              <td class="name">${p.name} (${p.CP} CP)</td>
-              <td class="desc">${p.description}</td>
+              <td><span class="abilityName">${p.name} (${p.CP} CP)</span> ${p.description}</td>
             </tr>
           `).join('')}
         </tbody>
@@ -111,12 +109,11 @@ const generateSummaryHTML = (operatives, stratPloys, tacPloys) => {
       <table>
         <tbody>
           <tr>
-            <th class="name" colspan="2">Tactical Ploys</th>
+            <th class="name">Tactical Ploys</th>
           </tr>
           ${tacPloys.map(p => `
             <tr>
-              <td class="name">${p.name} (${p.CP} CP)</td>
-              <td class="desc">${p.description}</td>
+              <td><span class="abilityName">${p.name} (${p.CP} CP)</span> ${p.description}</td>
             </tr>
           `).join('')}
         </tbody>
