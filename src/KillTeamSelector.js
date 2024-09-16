@@ -45,14 +45,15 @@ const KillTeamSelector = () => {
           },
           weapons: op.weapons.flatMap(weapon => 
             weapon.profiles.map(profile => ({
-              name: `${weaponIcons[weapon.weptype] || ''} ${weapon.wepname}${profile.name ? ` (${profile.name})` : ''}`,
+              // name: `${weaponIcons[weapon.weptype] || ''} ${weapon.wepname}${profile.name ? ` (${profile.name})` : ''}`,
+              name: `${weapon.wepname}${profile.name ? ` (${profile.name})` : ''}`,
               stats: {
                 A: profile.A,
                 BS: profile.BS,
                 D: profile.D,
                 SR: replaceShapeTokens(profile.SR),
-                type: weapon.weptype,
               },
+              type: weapon.weptype,
               checked: weapon.isdefault === 1
             }))
           ),
@@ -223,10 +224,10 @@ const KillTeamSelector = () => {
       className="teamSummary"
       srcDoc={SummaryHTML(operatives, stratPloys, tacPloys)}
       frameBorder="0"
-      scrolling="no"
-      style={{ width: '100%', height: '100vh' }}
+      style={{ width: '100%', height: '100vh', overflow: 'hidden' }}
     />
   );
+
 
   if (isLoading) return <div>Loading kill teams...</div>;
   if (error) return <div>{error}</div>;

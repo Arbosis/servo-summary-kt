@@ -62,17 +62,20 @@ const RenderOperative = ({ operative, toggleOperative, toggleWeapon, toggleOpAbi
     <React.Fragment>
       <div className='editorOperative'>
 
+        {/* op name and stats */}
         <OperativeNameAndStats operative={operative} toggleOperative={toggleOperative} />
 
+        {/* op weapons */}
         <div className="weapon-grid">
           {operative.weapons.map((weapon, weaponIndex) => (
             <div key={weaponIndex} className="weapon-item">
               <input type="checkbox" checked={weapon.checked} onChange={() => toggleWeapon(weaponIndex)} className="checkbox" />
-              <span>{weapon.name}</span>
+              <span>[{weapon.type}] {weapon.name}</span>
             </div>
           ))}
         </div>
 
+        {/* op abilities */}
         <div className="weapon-grid">
           {operative.abilities.map((ability, abilityIndex) => (
             <div key={abilityIndex} className="weapon-item">
