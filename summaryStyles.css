@@ -126,6 +126,7 @@ body {
 
 .abilityName {
   font-weight: var(--font-bold);
+  font-size: var(--font-size-normal);
 }
 
 .abilityList{
