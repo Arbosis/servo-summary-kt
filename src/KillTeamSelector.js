@@ -45,7 +45,7 @@ const KillTeamSelector = () => {
           },
           weapons: op.weapons.flatMap(weapon => 
             weapon.profiles.map(profile => ({
-              name: `${weaponIcons[weapon.weptype] || ''} ${weapon.wepname}${profile.name ? ` - ${profile.name}` : ''}`,
+              name: `${weaponIcons[weapon.weptype] || ''} ${weapon.wepname}${profile.name ? ` (${profile.name})` : ''}`,
               stats: {
                 A: profile.A,
                 BS: profile.BS,
@@ -152,56 +152,99 @@ const KillTeamSelector = () => {
               ))}
             </select>
             <div className='generateMenu'>
-              Generate summary:
-              {selectedTeam && (
+            {selectedTeam && (
+              <>
+                Generate summary:
                 <button onClick={openSummaryNewTab} className="generate-summary-button">
                   Web
                 </button>
-              )} 
-              {selectedTeam && (
                 <button onClick={PrintAsPDF} className="generate-summary-button">
                   PDF
                 </button>
-              )}
+              </>
+            )}
             </div>
           </div>
         </div> 
     );
   }
 
+  const [showPreview, setShowPreview] = useState(false);
+
+  const teamToolbar = () => {
+    const toggleShowPreview = () => setShowPreview(!showPreview);
+
+    return (
+      <div class="teamToolbar">
+        <span>
+          Editor
+          <label className="switch">
+            <input type="checkbox" checked={showPreview} onChange={toggleShowPreview} />
+            <span className="slider round"></span>
+          </label>
+          Preview
+        </span>
+      </div>
+    );
+  }
+
   const teamEditor = () => {
     return (
       <>
-
-        <div class="operativeEditorTitle">Operative editor</div>
-
-        {operatives.map((operative, opIndex) => (
-          <RenderOperative
-            key={opIndex}
-            operative={operative}
-            toggleOperative={() => toggleOperativeSelection(opIndex)}
-            toggleWeapon={(weaponIndex) => toggleWeaponSelection(opIndex, weaponIndex)}
-            toggleOpAbility={(abilityIndex) => toggleOpAbilitySelection(opIndex, abilityIndex)}
-          />
-        ))}
-          
+        <div className="teamEditor">
+          {operatives.map((operative, opIndex) => (
+            <RenderOperative
+              key={opIndex}
+              operative={operative}
+              toggleOperative={() => toggleOperativeSelection(opIndex)}
+              toggleWeapon={(weaponIndex) => toggleWeaponSelection(opIndex, weaponIndex)}
+              toggleOpAbility={(abilityIndex) => toggleOpAbilitySelection(opIndex, abilityIndex)}
+            />
+          ))}
+            
           <PloysTable ploys={stratPloys} tableName="Strat Ploys"/>
           <PloysTable ploys={tacPloys} tableName="Tac Ploys"/>
+        </div>
         </>
     );
-  }
+  };
+
+  const summaryPreview = (operatives, stratPloys, tacPloys) => (
+    <iframe
+      className="teamSummary"
+      srcDoc={SummaryHTML(operatives, stratPloys, tacPloys)}
+      frameBorder="0"
+      scrolling="no"
+      style={{ width: '100%', height: '100vh' }}
+    />
+  );
 
   if (isLoading) return <div>Loading kill teams...</div>;
   if (error) return <div>{error}</div>;
 
+  /* RETURN: RENDER CONTENT */ 
   return (
     <div className="container">
-      <TopBar />
-      
-      {selectedTeam && ( teamEditor() )}
+      {TopBar()}
+      {selectedTeam && (
+        <>
+          {teamToolbar()}
+
+          {showPreview ? (
+            summaryPreview(operatives, stratPloys, tacPloys)
+          ) : (
+            teamEditor()
+          )}
+        </>
+      )}
 
     </div>
   );
+
 };
 
+
 export default KillTeamSelector;
+
+
+
