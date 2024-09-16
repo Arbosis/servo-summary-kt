@@ -175,7 +175,7 @@ const KillTeamSelector = () => {
     const toggleShowPreview = () => setShowPreview(!showPreview);
 
     return (
-      <div class="teamToolbar">
+      <div className="teamToolbar">
         <span>
           Editor
           <label className="switch">
@@ -184,6 +184,15 @@ const KillTeamSelector = () => {
           </label>
           Preview
         </span>
+        {/* <span>
+          Generate summary:
+          <button onClick={openSummaryNewTab} className="generate-summary-button">
+            Web
+          </button>
+          <button onClick={PrintAsPDF} className="generate-summary-button">
+            PDF
+          </button>
+        </span> */}
       </div>
     );
   }
@@ -209,7 +218,7 @@ const KillTeamSelector = () => {
     );
   };
 
-  const summaryPreview = (operatives, stratPloys, tacPloys) => (
+  const showSummaryPreview = (operatives, stratPloys, tacPloys) => (
     <iframe
       className="teamSummary"
       srcDoc={SummaryHTML(operatives, stratPloys, tacPloys)}
@@ -231,7 +240,7 @@ const KillTeamSelector = () => {
           {teamToolbar()}
 
           {showPreview ? (
-            summaryPreview(operatives, stratPloys, tacPloys)
+            showSummaryPreview(operatives, stratPloys, tacPloys)
           ) : (
             teamEditor()
           )}
@@ -245,6 +254,7 @@ const KillTeamSelector = () => {
 
 
 export default KillTeamSelector;
+
 
 
 

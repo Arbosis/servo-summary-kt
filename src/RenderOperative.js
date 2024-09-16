@@ -2,7 +2,7 @@ import React from 'react';
 
 const OperativeStats = ({ stats }) => {
   return (
-      <table class="operative-stats">
+      <table className="operative-stats">
         <thead>
           <tr>
             <th>M</th>
@@ -29,9 +29,10 @@ const OperativeStats = ({ stats }) => {
 
 const OperativeNameAndStats = ({ operative, toggleOperative }) => {
   return (
-      <table class="operative-stats">
+      <table className="operative-stats">
+        <tbody>
           <tr>
-            <th rowspan="2" class="name">
+            <th rowSpan="2" className="name">
               <input type="checkbox" checked={operative.checked} onChange={toggleOperative} className="checkbox" />
               {operative.name}
             </th>
@@ -51,7 +52,7 @@ const OperativeNameAndStats = ({ operative, toggleOperative }) => {
             <td>{operative.stats.SV}</td>
             <td>{operative.stats.W}</td>
           </tr>
-
+        </tbody>
       </table>
   );
 };
@@ -59,7 +60,7 @@ const OperativeNameAndStats = ({ operative, toggleOperative }) => {
 const RenderOperative = ({ operative, toggleOperative, toggleWeapon, toggleOpAbility }) => {
   return (
     <React.Fragment>
-      <div class='editorOperative'>
+      <div className='editorOperative'>
 
         <OperativeNameAndStats operative={operative} toggleOperative={toggleOperative} />
 

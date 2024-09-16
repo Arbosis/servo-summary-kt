@@ -110,10 +110,11 @@ body {
   border-radius: 6px;
   margin-bottom: 15px;
   padding: 6px;
+  display: flex;
+  gap: 8px;
 
   button {
-    padding: 4px 8px;
-    margin-left: 2px;
+    /* padding: 4px 8px; */
     font-size: var(--font-size-default);
     background-color: var(--primary-color);
     color: white;
@@ -207,7 +208,6 @@ body {
       width: 30%;
       text-align: left;
       font-size: var(--font-size-big);
-      font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
       letter-spacing: 0.02em;
       text-transform: uppercase;
     }

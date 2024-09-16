@@ -9,8 +9,8 @@ const PloysTable = ({ ploys, tableName }) => {
         <tbody>
           {ploys.map(ploy => (
             <tr key={ploy.name}>
-              <td class="name">{ploy.name}</td>
-              <td class="desc">{ploy.description}</td>
+              <td className="name">{ploy.name}</td>
+              <td className="desc">{ploy.description}</td>
             </tr>
           ))}
         </tbody>
