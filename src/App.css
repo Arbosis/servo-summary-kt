@@ -12,6 +12,7 @@
   --font-size-big: 14px;
   --font-size-small: 11px;
   --font-family-default: 'Fira Sans Condensed', 'Arial', sans-serif;
+  --box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 }
 
 body {
@@ -36,7 +37,7 @@ body {
   background-color: white;
   padding: 15px;
   border-radius: 8px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  box-shadow: var(--box-shadow);
   color: var(--primary-color);
 
   .generateMenu {
@@ -100,7 +101,7 @@ body {
 
 .teamToolbar {
   background-color: white;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  box-shadow: var(--box-shadow);
   font-size: var(--font-size-default);
   text-align: left;
   color: var(--primary-color);
@@ -159,7 +160,7 @@ body {
         width: 12px;
         left: 2px;
         bottom: 2px;
-        background-color: white;
+        background-color: #fff; /* Make sure the circle is visible */
         transition: 0.4s;
         border-radius: 50%; /* Rounded knob */
       }
@@ -178,7 +179,7 @@ body {
 
 .editorOperative {
   border-radius: var(--border-radius-default);
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  box-shadow: var(--box-shadow);
   margin-bottom: 10px;
   background-color: white;
   overflow: auto;
@@ -239,22 +240,23 @@ body {
   width: 100%;
   border-collapse: separate;
   border-spacing: 0;
+  border-radius: var(--border-radius-default);
+  box-shadow: var(--box-shadow);
   background-color: white;
-  border-radius: 6px;
   overflow: hidden;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
   margin-bottom: 15px;
   font-size: 13px;
-  padding: 8px;
 
   th {
     background-color: var(--table-header-bg);
     font-weight: 600;
     text-align: left;
+    padding: 4px;
   }
 
   td {
     border-bottom: 1px solid var(--border-color);
+    padding: 4px;
   }
 
   .name {

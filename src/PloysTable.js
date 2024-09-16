@@ -4,7 +4,10 @@ const PloysTable = ({ ploys, tableName }) => {
     return (
       <table className="ploy-table">
         <thead>
-          <tr><th>{tableName}</th><th>Description</th></tr>
+          <tr>
+            <th colSpan={2}>{tableName}</th>
+            {/* <th>Description</th> */}
+          </tr>
         </thead>
         <tbody>
           {ploys.map(ploy => (
