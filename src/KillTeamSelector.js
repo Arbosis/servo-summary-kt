@@ -124,7 +124,7 @@ const KillTeamSelector = () => {
     setTimeout(() => {
         iframe.contentWindow.print();
         document.body.removeChild(iframe);  // Clean up iframe after printing
-    }, 50);
+    }, 100);
 };
 
   const openSummaryNewTab = () => {
