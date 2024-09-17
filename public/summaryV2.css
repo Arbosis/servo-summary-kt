@@ -1,0 +1,128 @@
+:root {
+    --main-bg-color: #f0f0f0;
+    --card-bg-color: #fff;
+    --border-color: #000;
+    --text-color: #333;
+    --header-bg-color: #000;
+    --header-text-color: #fff;
+    --table-border-color: #ccc;
+    --table-header-bg-color: #f0f0f0;
+    --font-size-base: 10px;
+    --font-size-large: 12px;
+    --font-size-xlarge: 14px;
+    --spacing-small: 3px;
+    --spacing-medium: 5px;
+    --spacing-large: 8px;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    background-color: var(--main-bg-color);
+    color: var(--text-color);
+    line-height: 1.4;
+    font-size: var(--font-size-base);
+  }
+  
+  .Card {
+    background-color: var(--card-bg-color);
+    border: 1px solid var(--border-color);
+    margin-bottom: var(--spacing-large);
+    padding: var(--spacing-medium);
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+  }
+  
+  .card-header {
+    background-color: var(--header-bg-color);
+    color: var(--header-text-color);
+    padding: var(--spacing-small) var(--spacing-medium);
+    margin: calc(-1 * var(--spacing-medium));
+    margin-bottom: var(--spacing-medium);
+  }
+  
+  .operative-name {
+    margin: 0;
+    font-size: var(--font-size-xlarge);
+    text-transform: uppercase;
+  }
+  
+  .card-stats {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: var(--spacing-medium);
+  }
+  
+  .stat {
+    text-align: center;
+    width: 23%;
+  }
+  
+  .stat-title {
+    display: block;
+    font-weight: bold;
+    font-size: var(--font-size-base);
+  }
+  
+  .stat-value {
+    display: block;
+    font-size: var(--font-size-large);
+  }
+  
+  .weapon-table table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: var(--spacing-medium);
+  }
+  
+  .weapon-table th, .weapon-table td {
+    border: 1px solid var(--table-border-color);
+    padding: var(--spacing-small);
+    text-align: center;
+  }
+  
+  .weapon-table th {
+    background-color: var(--table-header-bg-color);
+    font-weight: bold;
+  }
+  
+  .abilities h3 {
+    margin-top: var(--spacing-medium);
+    margin-bottom: var(--spacing-small);
+    font-size: var(--font-size-large);
+  }
+  
+  .abilities p {
+    margin: var(--spacing-small) 0;
+  }
+  
+  .abilityList table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: var(--spacing-large);
+  }
+  
+  .abilityList th {
+    background-color: var(--header-bg-color);
+    color: var(--header-text-color);
+    padding: var(--spacing-small) var(--spacing-medium);
+    text-align: left;
+  }
+  
+  .abilityList td {
+    border: 1px solid var(--table-border-color);
+    padding: var(--spacing-small) var(--spacing-medium);
+  }
+  
+  .abilityName {
+    font-weight: bold;
+  }
+  
+  @media print {
+    body {
+      background-color: var(--card-bg-color);
+    }
+    
+    .Card {
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+  }

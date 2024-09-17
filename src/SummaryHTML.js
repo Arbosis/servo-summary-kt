@@ -1,6 +1,7 @@
 import SummaryHTMLv1 from "./SummaryGenerators/SummaryV1";
+import SummaryHTMLv2 from "./SummaryGenerators/SummaryV2";
 
-let version = 'v1';
+let version = 'v2';
 
 const setSummaryVersion = (newVersion) => {
   if (Object.keys(summaryFunctions).includes(newVersion)) {
@@ -12,7 +13,7 @@ const setSummaryVersion = (newVersion) => {
 
 const summaryFunctions = {
   v1: SummaryHTMLv1,
-  v2: null, // TODO implement,
+  v2: SummaryHTMLv2,
 };
 
 const generateSummaryHTML = (operatives, stratPloys, tacPloys) => {
