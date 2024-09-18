@@ -1,128 +1,186 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed:wght@300;400;700&family=IBM+Plex+Sans+Condensed:wght@300;400;700&family=Oswald:wght@300;600;700&family=Recursive:wght@300;400;700&family=Roboto+Condensed:wght@300;700&family=Roboto:wght@300;400;700&display=swap');
+
 :root {
-    --main-bg-color: #f0f0f0;
-    --card-bg-color: #fff;
-    --border-color: #000;
-    --text-color: #333;
-    --header-bg-color: #000;
-    --header-text-color: #fff;
-    --table-border-color: #ccc;
-    --table-header-bg-color: #f0f0f0;
-    --font-size-base: 10px;
-    --font-size-large: 12px;
-    --font-size-xlarge: 14px;
-    --spacing-small: 3px;
-    --spacing-medium: 5px;
-    --spacing-large: 8px;
-  }
+  --main-bg-color: #f0f0f0;
+  --card-bg-color: #fff;
+  --border-color: #000;
+  --border-radius: 5px;
+  --text-color: #333;
+  --header-bg-color: #2c2c2c;
+  --header-text-color: #fff;
+  --table-border-color: #ccc;
+  --table-header-bg-color: #f0f0f0;
+  --font-size-base: 12px;
+  --font-size-large: 14px;
+  --font-size-xlarge: 16px;
+  --spacing-small: 3px;
+  --spacing-medium: 5px;
+  --spacing-large: 8px;
+  --font-familty-defaut: 'Roboto', 'Fira Sans Condensed', Arial, sans-serif;
+  --font-familty-condensed: 'Roboto', Arial, sans-serif;
+}
   
-  body {
-    font-family: Arial, sans-serif;
-    background-color: var(--main-bg-color);
-    color: var(--text-color);
-    line-height: 1.4;
-    font-size: var(--font-size-base);
-  }
-  
-  .Card {
-    background-color: var(--card-bg-color);
-    border: 1px solid var(--border-color);
-    margin-bottom: var(--spacing-large);
-    padding: var(--spacing-medium);
-    box-shadow: 0 0 5px rgba(0,0,0,0.1);
-  }
-  
+body {
+  font-family: var(--font-familty-defaut);
+  background-color: var(--main-bg-color);
+  color: var(--text-color);
+  line-height: 1.4;
+  font-size: var(--font-size-base);
+}
+
+.Card {
+  background-color: var(--card-bg-color);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  margin-bottom: var(--spacing-large);
+  padding: var(--spacing-medium);
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+  font-size: var(--font-size-base);
+
   .card-header {
     background-color: var(--header-bg-color);
     color: var(--header-text-color);
+    text-shadow: var(--main-bg-color);
     padding: var(--spacing-small) var(--spacing-medium);
     margin: calc(-1 * var(--spacing-medium));
     margin-bottom: var(--spacing-medium);
-  }
-  
-  .operative-name {
-    margin: 0;
-    font-size: var(--font-size-xlarge);
-    text-transform: uppercase;
-  }
-  
-  .card-stats {
     display: flex;
     justify-content: space-between;
-    margin-bottom: var(--spacing-medium);
-  }
+    
+    .operative-name {
+      margin-top: auto;
+      margin-bottom: auto;
+      font-size: var(--font-size-xlarge);
+      font-family: "Fira Sans Condensed";
+      text-transform: uppercase;
+      /* vertical-align: middle; */
+    }
+    
+    .card-stats {
+      display: flex;
+      justify-content: flex-end;
+      /* align-items: right; */
+      width: 60%;
   
-  .stat {
-    text-align: center;
-    width: 23%;
+      .stat {
+        text-align: center;
+        width: 70px;
+    
+        .stat-title {
+          display: block;
+          font-weight: bold;
+          font-size: var(--font-size-base);
+        }
+        
+        .stat-value {
+          display: block;
+          font-size: var(--font-size-large);
+        }
+      }
+    }    
   }
-  
-  .stat-title {
-    display: block;
-    font-weight: bold;
-    font-size: var(--font-size-base);
-  }
-  
-  .stat-value {
-    display: block;
-    font-size: var(--font-size-large);
-  }
-  
+
+  /* card weapons */
   .weapon-table table {
     width: 100%;
     border-collapse: collapse;
     margin-bottom: var(--spacing-medium);
-  }
+    font-size: inherit;
   
-  .weapon-table th, .weapon-table td {
-    border: 1px solid var(--table-border-color);
-    padding: var(--spacing-small);
-    text-align: center;
-  }
+    th, td {
+      border: 1px solid var(--table-border-color);
+      border-left: none;
+      border-right: none;
+      padding: var(--spacing-small);
+      text-align: center;
+    }
+    
+    th {
+      background-color: var(--table-header-bg-color);
+      font-weight: bold;
+    }
   
-  .weapon-table th {
-    background-color: var(--table-header-bg-color);
-    font-weight: bold;
+    .name {
+      text-align: left;
+      width: 35%;
+    }
+    .atk {
+      min-width: 30px;
+    }
+    .hit {
+      min-width: 30px;
+    }
+    .dmg {
+      min-width: 30px;
+    }
+    .wr {
+      text-align: left;
+      width: 35%;
+    }
   }
-  
-  .abilities h3 {
-    margin-top: var(--spacing-medium);
-    margin-bottom: var(--spacing-small);
+
+  /* Card abilities */
+  .abilities {
+    font-family: var(--font-familty-condensed);
+    p {
+      margin: var(--spacing-small) 0;
+      font-family: var(--font-familty-condensed);
+    }
+    strong {
+      font-family: var(--font-familty-defaut);
+    }
+    ul {
+      margin-top: 2px;
+      margin-bottom: 2px;
+    }
+  }
+}
+
+.abilityList table {
+  width: 100%;
+  background-color: var(--card-bg-color);
+  border: 1px solid var(--border-color);
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+  margin-bottom: var(--spacing-large);
+
+  th {
+    color: var(--header-text-color);
+    background-color: var(--header-bg-color);
+    padding: var(--spacing-small) var(--spacing-medium);
+    text-align: left;
     font-size: var(--font-size-large);
   }
   
-  .abilities p {
-    margin: var(--spacing-small) 0;
-  }
-  
-  .abilityList table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: var(--spacing-large);
-  }
-  
-  .abilityList th {
-    background-color: var(--header-bg-color);
-    color: var(--header-text-color);
-    padding: var(--spacing-small) var(--spacing-medium);
-    text-align: left;
-  }
-  
-  .abilityList td {
+  td {
     border: 1px solid var(--table-border-color);
     padding: var(--spacing-small) var(--spacing-medium);
+    font-family: var(--font-familty-condensed);
   }
   
-  .abilityName {
-    font-weight: bold;
+  strong {
+    font-family: var(--font-familty-defaut);
+  }
+}
+
+
+.noprint {
+  display: none;
+}
+
+@media print {
+  body {
+    background-color: white;
+    column-count: 2;
   }
   
-  @media print {
-    body {
-      background-color: var(--card-bg-color);
-    }
-    
-    .Card {
-      break-inside: avoid;
-      page-break-inside: avoid;
-    }
+  .Card {
+    break-inside: avoid;
+    page-break-inside: avoid;
   }
+}
+

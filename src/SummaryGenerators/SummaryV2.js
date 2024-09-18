@@ -3,6 +3,7 @@ const SummaryHTMLv2 = (operatives, stratPloys, tacPloys) => {
       <html>
         <head>
           <title>Kill Team Summary</title>
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
           <link rel="stylesheet" type="text/css" href="${process.env.PUBLIC_URL}/summaryV2.css">
         </head>
         <body>
@@ -31,25 +32,26 @@ const SummaryHTMLv2 = (operatives, stratPloys, tacPloys) => {
         <div class="Card">
 
           <div class="card-header">
-              <h1 class="operative-name">${op.name}</h1>
-          </div>
-          <div class="card-stats">
-              <div class="stat">
-                  <span class="stat-title">APL</span>
-                  <span class="stat-value">${op.stats.APL}</span>
-              </div>
-              <div class="stat">
-                  <span class="stat-title">MOVE</span>
-                  <span class="stat-value">${op.stats.M}</span>
-              </div>
-              <div class="stat">
-                  <span class="stat-title">SAVE</span>
-                  <span class="stat-value">${op.stats.SV}</span>
-              </div>
-              <div class="stat">
-                  <span class="stat-title">WOUNDS</span>
-                  <span class="stat-value">${op.stats.W}</span>
-              </div>
+            <h1 class="operative-name">${op.name}</h1>
+          
+            <div class="card-stats">
+                <div class="stat">
+                    <span class="stat-title">APL</span>
+                    <span class="stat-value">${op.stats.APL}</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-title">MOVE</span>
+                    <span class="stat-value">${op.stats.M}</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-title">SAVE</span>
+                    <span class="stat-value">${op.stats.SV}</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-title">WOUNDS</span>
+                    <span class="stat-value">${op.stats.W}</span>
+                </div>
+            </div>
           </div>
 
           ${weapons.length ? `
@@ -57,11 +59,11 @@ const SummaryHTMLv2 = (operatives, stratPloys, tacPloys) => {
             <table>
                 <thead>
                     <tr>
-                        <th>NAME</th>
-                        <th>ATK</th>
-                        <th>HIT</th>
-                        <th>DMG</th>
-                        <th>WR</th>
+                        <th class="name">NAME</th>
+                        <th class="atk">ATK</th>
+                        <th class="hit">HIT</th>
+                        <th class="dmg">DMG</th>
+                        <th class="wr">WR</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -69,11 +71,11 @@ const SummaryHTMLv2 = (operatives, stratPloys, tacPloys) => {
                       .map(
                         weapon => `
                           <tr>
-                            <td>${weapon.name}</td>
-                            <td>${weapon.stats.A}</td>
-                            <td>${weapon.stats.BS}</td>
-                            <td>${weapon.stats.D}</td>
-                            <td>${weapon.stats.SR}</td>
+                            <td class="name">${weapon.name}</td>
+                            <td class="atk">${weapon.stats.A}</td>
+                            <td class="hit">${weapon.stats.BS}</td>
+                            <td class="dmg">${weapon.stats.D}</td>
+                            <td class="wr">${weapon.stats.SR}</td>
                           </tr>
                         `
                       )
@@ -82,9 +84,9 @@ const SummaryHTMLv2 = (operatives, stratPloys, tacPloys) => {
             </table>
           </div>
           ` : ``}
+
           ${abilities.length ? `
           <div class="abilities">
-            <h3>Abilities</h3>
             ${abilities
               .map(
                 ability => `
@@ -112,7 +114,7 @@ const generatePloysTable = (stratPloys, tacPloys) => {
           </tr>
           ${stratPloys.map(p => `
             <tr>
-              <td><span class="abilityName">${p.name} (${p.CP} CP)</span> ${p.description}</td>
+              <td><strong>${p.name} (${p.CP} CP)</strong> ${p.description}</td>
             </tr>
           `).join('')}
         </tbody>
@@ -127,7 +129,7 @@ const generatePloysTable = (stratPloys, tacPloys) => {
           </tr>
           ${tacPloys.map(p => `
             <tr>
-              <td><span class="abilityName">${p.name} (${p.CP} CP)</span> ${p.description}</td>
+              <td><strong>${p.name} (${p.CP} CP)</strong> ${p.description}</td>
             </tr>
           `).join('')}
         </tbody>
