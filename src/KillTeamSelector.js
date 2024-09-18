@@ -224,9 +224,10 @@ const EditorControls = () => {
       className="teamSummary"
       srcDoc={SummaryHTML(operatives, stratPloys, tacPloys)}
       frameBorder="0"
-      style={{ width: '100%', height: '100vh', overflow: 'hidden' }}
+      style={{ width: '100%', height: 'auto', minHeight: '100vh', overflow: 'auto' }}
     />
   );
+
 
 
   if (isLoading) return <div>Loading kill teams...</div>;
