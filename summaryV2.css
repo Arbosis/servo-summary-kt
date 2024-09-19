@@ -137,6 +137,10 @@ body {
   }
 }
 
+.abilityList {
+  font-size: var(--font-size-base);
+}
+
 .abilityList table {
   width: 100%;
   background-color: var(--card-bg-color);
