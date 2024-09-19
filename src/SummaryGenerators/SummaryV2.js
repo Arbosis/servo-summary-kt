@@ -1,5 +1,6 @@
 const SummaryHTMLv2 = (operatives, stratPloys, tacPloys) => {
     let summaryHTML = `
+      <!DOCTYPE html>
       <html>
         <head>
           <title>Kill Team Summary</title>
@@ -7,7 +8,7 @@ const SummaryHTMLv2 = (operatives, stratPloys, tacPloys) => {
           <link rel="stylesheet" type="text/css" href="${process.env.PUBLIC_URL}/summaryV2.css">
         </head>
         <body>
-          ${generateOperativesTable(operatives, stratPloys, tacPloys)}
+          ${generateOperativesTable(operatives)}
           ${generatePloysTable(stratPloys, tacPloys)}
         </body>
       </html>
@@ -17,7 +18,7 @@ const SummaryHTMLv2 = (operatives, stratPloys, tacPloys) => {
   };
   
 
-  const generateOperativesTable = (operatives, stratPloys, tacPloys) => {
+  const generateOperativesTable = (operatives) => {
     let tableHTML = ``;
   
     tableHTML = operatives
@@ -26,9 +27,10 @@ const SummaryHTMLv2 = (operatives, stratPloys, tacPloys) => {
         op,
         weapons: op.weapons.filter(w => w.checked),
         abilities: op.abilities.filter(a => a.checked),
+        uniqueActions: op.uniqueActions.filter(a => a.checked),
       }))
       .map(
-        ({ op, weapons, abilities }) => `
+        ({ op, weapons, abilities, uniqueActions }) => `
         <div class="Card">
 
           <div class="card-header">
@@ -85,12 +87,20 @@ const SummaryHTMLv2 = (operatives, stratPloys, tacPloys) => {
           </div>
           ` : ``}
 
-          ${abilities.length ? `
+          ${(abilities.length || uniqueActions.length) ? `
           <div class="abilities">
             ${abilities
               .map(
                 ability => `
                   <p><strong>${ability.title}:</strong> ${ability.description}</p>
+                `
+              )
+              .join('')}
+
+            ${uniqueActions
+              .map(
+                uniqueAction => `
+                  <p><strong>${uniqueAction.title} (${uniqueAction.AP} AP):</strong> ${uniqueAction.description}</p>
                 `
               )
               .join('')}
@@ -110,9 +120,9 @@ const generatePloysTable = (stratPloys, tacPloys) => {
       <table>
         <tbody>
           <tr>
-            <th class="name">Strategic Ploys</th>
+            <th class="name">Strat Ploys</th>
           </tr>
-          ${stratPloys.map(p => `
+          ${stratPloys.filter(p => p.checked).map(p => `
             <tr>
               <td><strong>${p.name} (${p.CP} CP)</strong> ${p.description}</td>
             </tr>
@@ -125,9 +135,9 @@ const generatePloysTable = (stratPloys, tacPloys) => {
       <table>
         <tbody>
           <tr>
-            <th class="name">Ploys</th>
+            <th class="name">Tac Ploys</th>
           </tr>
-          ${tacPloys.map(p => `
+          ${tacPloys.filter(p => p.checked).map(p => `
             <tr>
               <td><strong>${p.name} (${p.CP} CP)</strong> ${p.description}</td>
             </tr>

@@ -39,7 +39,7 @@ const OperativeNameAndStats = ({ operative, toggleOperative }) => {
   );
 };
 
-const RenderOperative = ({ operative, toggleOperative, toggleWeapon, toggleOpAbility }) => {
+const RenderOperative = ({ operative, toggleOperative, toggleWeapon, toggleOpAbility, toggleOpUniqueAction }) => {
   return (
     <React.Fragment>
       <div className='editorOperative'>
@@ -71,6 +71,21 @@ const RenderOperative = ({ operative, toggleOperative, toggleWeapon, toggleOpAbi
                 className="checkbox"
               />
               <span>[UA]{ability.title}</span>
+            </div>
+          ))}
+        </div>
+
+        {/* op unique actions */}
+        <div className="weapon-grid">
+          {operative.uniqueActions.map((uniqueAction, uniqueActionIndex) => (
+            <div key={uniqueActionIndex} className="weapon-item">
+              <input
+                type="checkbox"
+                checked={uniqueAction.checked}
+                onChange={() => toggleOpUniqueAction(uniqueActionIndex)}
+                className="checkbox"
+              />
+              <span>[UA]{uniqueAction.title}</span>
             </div>
           ))}
         </div>

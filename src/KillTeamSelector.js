@@ -56,7 +56,13 @@ const KillTeamSelector = () => {
           ),
           abilities: op.abilities.map(ability => ({
             title: ability.title,
-            description: ability.description,
+            description: replaceShapeTokens(ability.description),
+            checked: true
+          })) || [],
+          uniqueActions: op.uniqueactions.map(uniqueaction => ({
+            title: uniqueaction.title,
+            description: replaceShapeTokens(uniqueaction.description),
+            AP: uniqueaction.AP,
             checked: true
           })) || [],
           checked: true
@@ -65,12 +71,14 @@ const KillTeamSelector = () => {
       const stratPloys = team.ploys.strat.map(p => ({
         name: p.ployname,
         CP: p.CP,
-        description: replaceShapeTokens(p.description)
+        description: replaceShapeTokens(p.description),
+        checked: true
       }));
       const tacPloys = team.ploys.tac.map(p => ({
         name: p.ployname,
         CP: p.CP,
-        description: replaceShapeTokens(p.description)
+        description: replaceShapeTokens(p.description),
+        checked: true
       }));
       setOperatives(teamOperatives);
       setStratPloys(stratPloys);
@@ -99,6 +107,21 @@ const KillTeamSelector = () => {
       ...op,
       abilities: op.abilities.map((w, j) => j === abilityIndex ? { ...w, checked: !w.checked } : w)
     } : op));
+  };
+
+  const toggleOpUniqueActionSelection = (opIndex, uniqueActionIndex) => {
+    setOperatives(ops => ops.map((op, i) => i === opIndex ? {
+      ...op,
+      uniqueActions: op.uniqueActions.map((w, j) => j === uniqueActionIndex ? { ...w, checked: !w.checked } : w)
+    } : op));
+  };
+
+  const toggleStratPloySelection = (index) => {
+    setStratPloys(ploys => ploys.map((p, i) => i === index ? { ...p, checked: !p.checked } : p));
+  };
+
+  const toggleTacPloySelection = (index) => {
+    setTacPloys(ploys => ploys.map((p, i) => i === index ? { ...p, checked: !p.checked } : p));
   };
 
   const PrintAsPDF = () => {
@@ -137,29 +160,29 @@ const KillTeamSelector = () => {
   };
 
 
-const EditorControls = () => {
-  return (
-    <div className="controls">
-        {/* This section hides when no team is selected */}
-        <div className='generateMenu'>
-        {selectedTeam && (
-          <>
-            {/* Generate buttons */}
-            Generate summary:
-            <button onClick={openSummaryNewTab} className="generate-summary-button">
-              Web
-            </button>
-            <button onClick={PrintAsPDF} className="generate-summary-button">
-              PDF
-            </button>
-            {/* Edit/preview toggle */}
-            <ToggleBox text1="Editor" text2="Preview" onChangeHandle={toggleShowPreview}/>
-          </>
-        )}
-        </div>
-      </div>
-  )
-}
+// const EditorControls = () => {
+//   return (
+//     <div className="controls">
+//         {/* This section hides when no team is selected */}
+//         <div className='generateMenu'>
+//         {selectedTeam && (
+//           <>
+//             {/* Generate buttons */}
+//             Generate summary:
+//             <button onClick={openSummaryNewTab} className="generate-summary-button">
+//               Web
+//             </button>
+//             <button onClick={PrintAsPDF} className="generate-summary-button">
+//               PDF
+//             </button>
+//             {/* Edit/preview toggle */}
+//             <ToggleBox text1="Editor" text2="Preview" onChangeHandle={toggleShowPreview}/>
+//           </>
+//         )}
+//         </div>
+//       </div>
+//   )
+// }
 
   const TopBar = () => {
     return (
@@ -209,11 +232,20 @@ const EditorControls = () => {
               toggleOperative={() => toggleOperativeSelection(opIndex)}
               toggleWeapon={(weaponIndex) => toggleWeaponSelection(opIndex, weaponIndex)}
               toggleOpAbility={(abilityIndex) => toggleOpAbilitySelection(opIndex, abilityIndex)}
+              toggleOpUniqueAction={(uniqueActionIndex) => toggleOpUniqueActionSelection(opIndex, uniqueActionIndex)}
             />
           ))}
             
-          <PloysTable ploys={stratPloys} tableName="Strat Ploys"/>
-          <PloysTable ploys={tacPloys} tableName="Tac Ploys"/>
+          <PloysTable 
+            ploys={stratPloys} 
+            tableName="Strat Ploys"
+            togglePloySelection={(index) => toggleStratPloySelection(index)}
+          />
+          <PloysTable 
+            ploys={tacPloys} 
+            tableName="Tac Ploys"
+            togglePloySelection={(index) => toggleTacPloySelection(index)}
+          />
         </div>
         </>
     );
