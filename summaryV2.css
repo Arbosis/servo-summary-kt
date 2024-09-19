@@ -10,10 +10,10 @@
   --header-text-color: #222;
   --table-border-color: #ccc;
   --table-header-bg-color: #f0f0f0;
-  --font-size-base: 11px;
-  --font-size-large: 13px;
-  --font-size-xlarge: 15px;
-  --spacing-small: 3px;
+  --font-size-base: 12px;
+  --font-size-large: 14px;
+  --font-size-xlarge: 16px;
+  --spacing-small: 2px;
   --spacing-medium: 5px;
   --spacing-large: 8px;
   --font-familty-defaut: 'Roboto', 'Fira Sans Condensed', Arial, sans-serif;
@@ -185,13 +185,18 @@ body {
   body {
     background-color: white;
     column-count: 2;
+    /* display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly; */
   }
   
   * {
     box-shadow: none !important;
   }
   
+
   .Card {
+    /* width: 350px; */
     break-inside: avoid;
     page-break-inside: avoid;
   }
