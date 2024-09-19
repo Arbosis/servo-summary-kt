@@ -159,31 +159,6 @@ const KillTeamSelector = () => {
     summaryWindow.document.close();
   };
 
-
-// const EditorControls = () => {
-//   return (
-//     <div className="controls">
-//         {/* This section hides when no team is selected */}
-//         <div className='generateMenu'>
-//         {selectedTeam && (
-//           <>
-//             {/* Generate buttons */}
-//             Generate summary:
-//             <button onClick={openSummaryNewTab} className="generate-summary-button">
-//               Web
-//             </button>
-//             <button onClick={PrintAsPDF} className="generate-summary-button">
-//               PDF
-//             </button>
-//             {/* Edit/preview toggle */}
-//             <ToggleBox text1="Editor" text2="Preview" onChangeHandle={toggleShowPreview}/>
-//           </>
-//         )}
-//         </div>
-//       </div>
-//   )
-// }
-
   const TopBar = () => {
     return (
       <div className="top-bar">
@@ -252,15 +227,10 @@ const KillTeamSelector = () => {
   };
 
   const summaryPreviewView = (operatives, stratPloys, tacPloys) => (
-    <iframe
-      className="teamSummary"
-      srcDoc={SummaryHTML(operatives, stratPloys, tacPloys)}
-      frameBorder="0"
-      style={{ width: '100%', height: 'auto', minHeight: '100vh', overflow: 'auto' }}
-    />
+    <div className="teamSummary" style={{ width: '100%', height: 'auto', minHeight: '100vh', overflow: 'auto' }}>
+      <div dangerouslySetInnerHTML={{__html: SummaryHTML(operatives, stratPloys, tacPloys)}} />
+    </div>
   );
-
-
 
   if (isLoading) return <div>Loading kill teams...</div>;
   if (error) return <div>{error}</div>;
